@@ -12,12 +12,12 @@ class Character:
         self.level = 0
         
         #  Calculates the abilities using the standard method
-        self.strength = Abilities("Strenght") # Physical power
-        self.wisdow = Abilities("Wisdom") # Perception and Insight
-        self.charisma = Abilities("Charisma") # Personnality strength
-        self.dexterity = Abilities("Dexterity") # Agility
-        self.intelligence = Abilities("Intelligence") # Reasoning and Memory
-        self.constitution = Abilities("Constitution") # Endurance
+        self.strength = Abilities.Ability("Strenght") # Physical power
+        self.wisdow = Abilities.Ability("Wisdom") # Perception and Insight
+        self.charisma = Abilities.Ability("Charisma") # Personnality strength
+        self.dexterity = Abilities.Ability("Dexterity") # Agility
+        self.intelligence = Abilities.Ability("Intelligence") # Reasoning and Memory
+        self.constitution = Abilities.Ability("Constitution") # Endurance
         
         #TODO Incoporate races
         #TODO Incorporate classes
