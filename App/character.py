@@ -7,6 +7,7 @@ class Character:
         self.name = name
         self.race = race
         self.chr_class = chr_class
+        self.level = 0
         
         #  Calculates the abilities using the standard method
         self.strength = dice.roll(3, 6) # Physical power
