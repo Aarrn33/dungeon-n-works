@@ -1,5 +1,6 @@
 import Utilities.dice as dice
 import App.classes as Classes
+import App.abilities as Abilities
 
 # This class is used to create and manage a DnD character
 class Character:
@@ -11,9 +12,9 @@ class Character:
         self.level = 0
         
         #  Calculates the abilities using the standard method
-        self.strength = dice.d6.roll(3) # Physical power
-        self.wisdow = dice.d6.roll(3) # Perception and Insight
-        self.charisma = dice.d6.roll(3) # Personnality strength
-        self.dexterity = dice.d6.roll(3) # Agility
-        self.intelligence = dice.d6.roll(3) # Reasoning and Memory
-        self.constitution = dice.d6.roll(3) # Endurance
+        self.strength = Abilities("Strenght") # Physical power
+        self.wisdow = Abilities("Wisdom") # Perception and Insight
+        self.charisma = Abilities("Charisma") # Personnality strength
+        self.dexterity = Abilities("Dexterity") # Agility
+        self.intelligence = Abilities("Intelligence") # Reasoning and Memory
+        self.constitution = Abilities("Constitution") # Endurance
