@@ -1,6 +1,7 @@
+import Utilities.dice as Dice
 # A class that is used to create classes
 class Classes:
-    def __init__(self, name: str, hd: Dice, st: list, skills: list, nbskills: int):
+    def __init__(self, name: str, hd: Dice.Dice, st: list, skills: list, nbskills: int):
         self.name = name #N Name of the class
         self.hd = hd # Hit dice
         self.st = st # Skills which have saving throws
