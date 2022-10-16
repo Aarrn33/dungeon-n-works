@@ -18,3 +18,7 @@ class Character:
         self.dexterity = Abilities("Dexterity") # Agility
         self.intelligence = Abilities("Intelligence") # Reasoning and Memory
         self.constitution = Abilities("Constitution") # Endurance
+        
+        #TODO Incoporate races
+        #TODO Incorporate classes
+        #TODO Calculates skills
