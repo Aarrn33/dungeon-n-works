@@ -1,8 +1,9 @@
 import Utilities.dice as dice
+import App.classes as Classes
 
 # This class is used to create and manage a DnD character
 class Character:
-    def __init__(self, name, race, chr_class):
+    def __init__(self, name: str, race, chr_class: Classes.Classes):
         # Assigns main identifiers
         self.name = name
         self.race = race
