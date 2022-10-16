@@ -22,28 +22,34 @@ class Character:
         
         # Calculates skills
         # Strength dependants
-        self.athletics = Skills.Skill("Athletics")
+        dependancy = self.strength
+        self.athletics = Skills.Skill("Athletics", dependancy)
         # Dexterity dependants
-        self.acrobatics = Skills.Skill("Acrobatics")
-        self.sleight_of_hand = Skills.Skill("Sleight of Hand")
-        self.stealth = Skills.Skill("Stealth")
+        dependancy = self.dexterity
+        self.acrobatics = Skills.Skill("Acrobatics", dependancy)
+        self.sleight_of_hand = Skills.Skill("Sleight of Hand", dependancy)
+        self.stealth = Skills.Skill("Stealth", dependancy)
         # Intelligence dependants
-        self.arcana = Skills.Skill("Arcana")
-        self.history = Skills.Skill("History")
-        self.investigation = Skills.Skill("Investigation")
-        self.nature = Skills.Skill("Nature")
-        self.religion = Skills.Skill("Religion")
+        dependancy = self.intelligence
+        self.arcana = Skills.Skill("Arcana", dependancy)
+        self.history = Skills.Skill("History", dependancy)
+        self.investigation = Skills.Skill("Investigation", dependancy)
+        self.nature = Skills.Skill("Nature", dependancy)
+        self.religion = Skills.Skill("Religion", dependancy)
         # Wisdom dependants
-        self.animal_handling = Skills.Skill("Animal Handling")
-        self.insight = Skills.Skill("Insight")
-        self.medicine = Skills.Skill("Medicine")
-        self.perception = Skills.Skill("Perception")
-        self.survival = Skills.Skill("Survival")
+        dependancy = self.wisdow
+        self.animal_handling = Skills.Skill("Animal Handling", dependancy)
+        self.insight = Skills.Skill("Insight", dependancy)
+        self.medicine = Skills.Skill("Medicine", dependancy)
+        self.perception = Skills.Skill("Perception", dependancy)
+        self.survival = Skills.Skill("Survival", dependancy)
         # Charisma dependants
-        self.deception = Skills.Skill("Deception")
-        self.intimidation = Skills.Skill("Intiimidation")
-        self.performance = Skills.Skill("Performance")
-        self.persuasion = Skills.Skill("Persuasion")
+        dependancy = self.charisma
+        self.deception = Skills.Skill("Deception", dependancy)
+        self.intimidation = Skills.Skill("Intiimidation", dependancy)
+        self.performance = Skills.Skill("Performance", dependancy)
+        self.persuasion = Skills.Skill("Persuasion", dependancy)
+        
         #TODO Incoporate races
         #TODO Incorporate classes
         
