@@ -11,6 +11,8 @@ class Character:
         self.race = race
         self.chr_class = chr_class
         self.level = 0
+        self.inspiration = 0
+        self.pb = 2 # Proficiency bonus
         
         #  Calculates the abilities using the standard method
         self.strength = Abilities.Ability("Strenght") # Physical power
@@ -19,6 +21,10 @@ class Character:
         self.dexterity = Abilities.Ability("Dexterity") # Agility
         self.intelligence = Abilities.Ability("Intelligence") # Reasoning and Memory
         self.constitution = Abilities.Ability("Constitution") # Endurance
+        
+        # Calculates default armor class
+        # AC = 10 + dexterity
+        self.ac = 10 + self.dexterity.modifier
         
         # Calculates skills
         # Strength dependants
@@ -50,6 +56,10 @@ class Character:
         self.performance = Skills.Skill("Performance", dependancy)
         self.persuasion = Skills.Skill("Persuasion", dependancy)
         
-        #TODO Incoporate races
-        #TODO Incorporate classes
+        #TODO Incorporate saving throws
+        #TODO Incorporates races
+        if self.race == Races.human:
+            pass
         
+        #TODO Incorporates classes
+        #TODO Add inventory
