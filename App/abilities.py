@@ -6,7 +6,7 @@ class Ability:
     def __init__(self, name: str):
         self.name = name
         self.value = dice.d6.roll(3)
-        self.modifier = score2modifier.score2modifier(self.value)
+        self.modifier = score2modifier.score_2_modifier(self.value)
         
 #Adds classes for each ability
 class Strength(Ability):
