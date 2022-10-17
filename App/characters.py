@@ -19,10 +19,6 @@ class Character:
         self.wisdow = Abilities.Wisdom() # Perception and Insight
         self.charisma = Abilities.Charisma() # Personnality strength
         self.dexterity = Abilities.Dexterity() # Agility
-        self.dexterity.__init__()
-        print(self.dexterity)
-        import inspect
-        print(inspect.getmembers(self.dexterity, lambda a : not(inspect.isroutine(a))))
         self.intelligence = Abilities.Intelligence # Reasoning and Memory
         self.constitution = Abilities.Constitution # Endurance
         
