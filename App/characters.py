@@ -15,12 +15,12 @@ class Character:
         self.pb = 2 # Proficiency bonus
         
         #  Calculates the abilities using the standard method
-        self.strength = Abilities.Ability("Strenght") # Physical power
-        self.wisdow = Abilities.Ability("Wisdom") # Perception and Insight
-        self.charisma = Abilities.Ability("Charisma") # Personnality strength
-        self.dexterity = Abilities.Ability("Dexterity") # Agility
-        self.intelligence = Abilities.Ability("Intelligence") # Reasoning and Memory
-        self.constitution = Abilities.Ability("Constitution") # Endurance
+        self.strength = Abilities.Strength # Physical power
+        self.wisdow = Abilities.Wisdom # Perception and Insight
+        self.charisma = Abilities.Charisma # Personnality strength
+        self.dexterity = Abilities.Dexterity # Agility
+        self.intelligence = Abilities.Intelligence # Reasoning and Memory
+        self.constitution = Abilities.Constitution # Endurance
         
         # Calculates default armor class
         # AC = 10 + dexterity
