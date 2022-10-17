@@ -1,4 +1,4 @@
-import App.Abilities as Abilities
+import App.abilities as Abilities
 
 # A class that implements the skills deriving from the abilities
 class Skill:
