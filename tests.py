@@ -1,5 +1,5 @@
 import App.abilities as Abilities
-from App.characters import Character
+import App.characters as Characters
 import App.skills as Skills
 import App.races as Races
 import App.classes as Classes
