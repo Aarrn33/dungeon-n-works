@@ -94,9 +94,9 @@ class Insight(Skill):
         super().__init__(self.name, self.dependancy)
         self.value = super().value
         self.modifier = super().modifier
-class Medecine(Skill):
+class Medicine(Skill):
     def __init__(self):
-        self.name = "Medecine"
+        self.name = "Medicine"
         self.dependancy = Abilities.Wisdom
         super().__init__(self.name, self.dependancy)
         self.value = super().value

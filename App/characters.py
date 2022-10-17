@@ -29,6 +29,7 @@ class Character:
         # Calculates default armor class
         # AC = 10 + dexterity
         self.ac = 10 + self.dexterity.modifier
+        print(self.ac)
         
         # Calculates skills
         # Strength dependants
