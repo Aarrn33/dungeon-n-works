@@ -1,4 +1,4 @@
-import Utilities.dice as dice
+import App.Utilities.dice as dice
 # A class that is used to create character classes
 class Classes:
     def __init__(self, name: str, hd: dice.Dice, st: list, skills: list, nbskills: int):

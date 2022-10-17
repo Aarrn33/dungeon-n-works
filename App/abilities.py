@@ -1,5 +1,5 @@
-import Utilities.score2modifier as score2modifier
-import Utilities.dice as dice
+import App.Utilities.score2modifier as score2modifier
+import App.Utilities.dice as dice
 
 # A class that is used to define the abilities of a character
 class Ability:
