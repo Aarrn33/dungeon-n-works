@@ -16,7 +16,7 @@ class Character:
         
         #  Calculates the abilities using the standard method
         self.strength = Abilities.Strength() # Physical power
-        self.wisdow = Abilities.Wisdom() # Perception and Insight
+        self.wisdom = Abilities.Wisdom() # Perception and Insight
         self.charisma = Abilities.Charisma() # Personnality strength
         self.dexterity = Abilities.Dexterity() # Agility
         self.intelligence = Abilities.Intelligence() # Reasoning and Memory
@@ -28,28 +28,33 @@ class Character:
         
         # Calculates skills
         # Strength dependants
-        self.athletics = Skills.Athletics()
+        dependancy = self.strength
+        self.athletics = Skills.Athletics(dependancy)
         # Dexterity dependants
-        self.acrobatics = Skills.Acrobatics()
-        self.sleight_of_hand = Skills.Sleight_of_Hand()
-        self.stealth = Skills.Stealth()
+        dependancy = self.dexterity
+        self.acrobatics = Skills.Acrobatics(dependancy)
+        self.sleight_of_hand = Skills.Sleight_of_Hand(dependancy)
+        self.stealth = Skills.Stealth(dependancy)
         # Intelligence dependants
-        self.arcana = Skills.Arcana()
-        self.history = Skills.History()
-        self.investigation = Skills.Investigation()
-        self.nature = Skills.Nature()
-        self.religion = Skills.Religion()
+        dependancy = self.intelligence
+        self.arcana = Skills.Arcana(dependancy)
+        self.history = Skills.History(dependancy)
+        self.investigation = Skills.Investigation(dependancy)
+        self.nature = Skills.Nature(dependancy)
+        self.religion = Skills.Religion(dependancy)
         # Wisdom dependants
-        self.animal_handling = Skills.Animal_Handling()
-        self.insight = Skills.Insight()
-        self.medicine = Skills.Medicine()
-        self.perception = Skills.Perception()
-        self.survival = Skills.Survival()
+        dependancy = self.wisdom
+        self.animal_handling = Skills.Animal_Handling(dependancy)
+        self.insight = Skills.Insight(dependancy)
+        self.medicine = Skills.Medicine(dependancy)
+        self.perception = Skills.Perception(dependancy)
+        self.survival = Skills.Survival(dependancy)
         # Charisma dependants
-        self.deception = Skills.Deception()
-        self.intimidation = Skills.Intimidation()
-        self.performance = Skills.Performance()
-        self.persuasion = Skills.Persuasion()
+        dependancy = self.charisma
+        self.deception = Skills.Deception(dependancy)
+        self.intimidation = Skills.Intimidation(dependancy)
+        self.performance = Skills.Performance(dependancy)
+        self.persuasion = Skills.Persuasion(dependancy)
         
         #TODO Incorporate saving throws
         #TODO Incorporates races
