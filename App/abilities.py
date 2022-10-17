@@ -7,3 +7,13 @@ class Ability:
         self.name = name
         self.value = dice.d6.roll(3)
         self.modifier = score2modifier.score2modifier(self.value)
+        
+#TODO Add classes for each ability
+"""
+Strength
+Wisdow
+Charisma
+Dexterity
+Intelligence
+Constitution
+"""

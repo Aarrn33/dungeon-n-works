@@ -7,3 +7,30 @@ class Skill:
         self.dependancy = dependancy
         self.value = self.dependancy.value
         self.modifier = self.dependancy.modifier
+
+# TODO Add classes for each skill
+"""
+Strength dependants : 
+Athletics
+Dexterity dependants : 
+Acrobatics
+Sleight of Hand
+Stealth
+Intelligence dependants : 
+Arcana
+History
+Investigation
+Nature
+Religion
+Wisdom dependants : 
+Animal Handling
+Insight
+Medecine
+Perception
+Survival
+Charisma dependants
+Deception
+Intimidation
+Performance
+Persuasion
+"""
