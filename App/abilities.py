@@ -13,43 +13,31 @@ class Strength(Ability):
     def __init__(self):
         self.name = "Strength"
         super().__init__(self.name)
-        self.value = super().value
-        self.modifier = super().modifier
         
 class Wisdom(Ability):
     def __init__(self):
         self.name = "Wisdom"
         super().__init__(self.name)
-        self.value = super().value
-        self.modifier = super().modifier
         
 class Charisma(Ability):
     def __init__(self):
         self.name = "Charisma"
         super().__init__(self.name)
-        self.value = super().value
-        self.modifier = super().modifier
 
 class Dexterity(Ability):
     def __init__(self):
         self.name = "Dexterity"
         super().__init__(self.name)
-        self.value = super().value
-        self.modifier = super().modifier
 
 class Intelligence(Ability):
     def __init__(self):
         self.name = "Intelligence"
         super().__init__(self.name)
-        self.value = super().value
-        self.modifier = super().modifier
         
 class Constitution(Ability):
     def __init__(self):
         self.name = "Constitution"
         super().__init__(self.name)
-        self.value = super().value
-        self.modifier = super().modifier
         
 class Test_ability(Ability):
     def __init__(self):
