@@ -34,8 +34,8 @@ class Dexterity(Ability):
     def __init__(self):
         self.name = "Dexterity"
         super().__init__(self.name)
-        self.value = self.super.value
-        self.modifier = self.super.modifier
+        self.value = super().self.value
+        self.modifier = super().self.modifier
         print(self.modifier)
 
 class Intelligence(Ability):
