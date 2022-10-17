@@ -15,11 +15,11 @@ class Character:
         self.pb = 2 # Proficiency bonus
         
         #  Calculates the abilities using the standard method
-        self.strength = Abilities.Strength # Physical power
-        self.wisdow = Abilities.Wisdom # Perception and Insight
-        self.charisma = Abilities.Charisma # Personnality strength
-        self.dexterity = Abilities.Dexterity # Agility
-        self.dexterity.__init__()
+        self.strength = Abilities.Strength() # Physical power
+        self.wisdow = Abilities.Wisdom() # Perception and Insight
+        self.charisma = Abilities.Charisma() # Personnality strength
+        self.dexterity = Abilities.Dexterity() # Agility
+        self.dexterity.__init__(self.dexterity)
         print(self.dexterity)
         import inspect
         print(inspect.getmembers(self.dexterity, lambda a : not(inspect.isroutine(a))))
