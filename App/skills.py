@@ -159,7 +159,7 @@ class Intelligence_dep:
         self.dependants = [Arcana, History, Investigation, Nature, Religion]
 class Wisdom_dep:
     def __init__(self):
-        self.dependants = [Animal_Handling, Insight, Medecine, Perception, Survival]
+        self.dependants = [Animal_Handling, Insight, Medicine, Perception, Survival]
 class Charisma_dep:
     def __init__(self):
         self.dependants = [Deception, Intimidation, Performance, Persuasion]
