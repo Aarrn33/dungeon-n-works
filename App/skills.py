@@ -9,7 +9,8 @@ class Skill:
         self.modifier = self.dependancy.modifier
 
 
-#Adds classes for each skill
+# Adds classes for each skill
+# Strength dependants
 class Athletics(Skill):
     def __init__(self):
         self.name = "Athletics"
@@ -18,6 +19,7 @@ class Athletics(Skill):
         self.value = super().value
         self.modifier = super().modifier
 
+# Dexterity dependants
 class Acrobatics(Skill):
     def __init__(self):
         self.name = "Acrobatics"
@@ -40,6 +42,7 @@ class Stealth(Skill):
         self.value = super().value
         self.modifier = super().modifier
 
+# Intelligence dependants
 class Arcana(Skill):
     def __init__(self):
         self.name = "Arcana"
@@ -76,6 +79,7 @@ class Religion(Skill):
         self.value = super().value
         self.modifier = super().modifier
 
+# Wisdom dependants
 class Animal_Handling(Skill):
     def __init__(self):
         self.name = "Animal Handling"
@@ -112,6 +116,7 @@ class Survival(Skill):
         self.value = super().value
         self.modifier = super().modifier
 
+# Charisma dependats
 class Deception(Skill):
     def __init__(self):
         self.name = "Deception"
