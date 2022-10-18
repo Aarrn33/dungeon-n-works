@@ -14,7 +14,7 @@ class Character:
         self.level = 0
         self.inspiration = 0
         self.pb = 2 # Proficiency bonus
-        self.speed = 30
+        self.inventory = []
         
         #  Calculates the abilities using the standard method
         self.strength = Abilities.Strength() # Physical power
@@ -66,4 +66,4 @@ class Character:
             #TODO Add draconic ancestry mecanic to incorporate fire breath
         
         #TODO Incorporates classes
-        #TODO Add inventory
+        #TODO Add movement speed
