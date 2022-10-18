@@ -63,6 +63,7 @@ class Character:
         if self.race == Races.dragonborn:
             self.strength.modify_value(2)
             self.charisma.modify_value(1)
+            #TODO Add draconic ancestry mecanic to incorporate fire breath
         
         #TODO Incorporates classes
         #TODO Add inventory
