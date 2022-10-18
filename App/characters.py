@@ -2,6 +2,7 @@ import App.races as Races
 import App.classes as Classes
 import App.abilities as Abilities
 import App.skills as Skills
+import App.Utilities.dice as Dice
 
 # This class is used to create and manage a DnD character
 class Character:
@@ -13,6 +14,7 @@ class Character:
         self.level = 0
         self.inspiration = 0
         self.pb = 2 # Proficiency bonus
+        self.speed = 30
         
         #  Calculates the abilities using the standard method
         self.strength = Abilities.Strength() # Physical power
@@ -58,8 +60,9 @@ class Character:
         
         #TODO Incorporate saving throws
         #TODO Incorporates races
-        if self.race == Races.human:
-            pass
+        if self.race == Races.dragonborn:
+            self.strength.modify_value(2)
+            self.charisma.modify_value(1)
         
         #TODO Incorporates classes
         #TODO Add inventory

@@ -1,5 +1,6 @@
 import App.Utilities.score2modifier as score2modifier
 import App.Utilities.dice as dice
+from math import floor
 
 # A class that is used to define the abilities of a character
 class Ability:
@@ -7,6 +8,14 @@ class Ability:
         self.name = name
         self.value = dice.d6.roll(3)
         self.modifier = score2modifier.score_2_modifier(self.value)
+        
+    def modify_value(self, factor: int):
+        self.value += factor
+        self.modifier = score2modifier.score_2_modifier(self.value)
+    
+    def modify_modfier(self, factor: int):
+        self.modifier += factor
+        self.value = floor((self.modifier*2)+10)
         
 #Adds classes for each ability
 class Strength(Ability):
