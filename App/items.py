@@ -1,5 +1,6 @@
 import uuid
 import App.Utilities.dice as Dices
+import App.utilities.distances as Distances
 
 
 # A super class for items
@@ -34,7 +35,7 @@ class Weapon(Unique):
         self.uuid = self.uuid
         #TODO Add a system to incorporate damage type (ie. piercing)
         
-# Adds a class for melee weapons
+# Adds a class for melee weapons()
 class Melee(Weapon):
     def __init__(self, name: str, damage: Dices.Dice) -> None:
         self.name = name
@@ -42,12 +43,14 @@ class Melee(Weapon):
         super().__init__(self.name, self.damage)
         self.uuid = self.uuid
 
-#TODO Add a class for ranged weapons
+#Add a class for ranged weapons
 class Range(Weapon):
-    def __init__(self, name: str, damage: Dices.Dice) -> None:
+    def __init__(self, name: str, damage: Dices.Dice, n_distance: Distances.Distance, l_distance: Distances.Distance) -> None:
         self.name = name
         self.damage = damage
         super().__init__(name, damage)
         self.uuid = self.uuid
-        #TODO Add a systel for range
+        assert n_distance <= l_distance, "The normal range distance must shoreter then the long distance"
+        self.n_distance = n_distance
+        self.l_distance = l_distance
         #TODO Add a system to use ammunition
