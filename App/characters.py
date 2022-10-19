@@ -6,7 +6,7 @@ import App.Utilities.dice as Dice
 
 # This class is used to create and manage a DnD character
 class Character:
-    def __init__(self, name: str, race: Races.Race, chr_class: Classes.Classes):
+    def __init__(self, name: str, race, chr_class: Classes.Classes):
         # Assigns main identifiers
         self.name = name
         self.race = race
@@ -60,10 +60,11 @@ class Character:
         
         #TODO Incorporate saving throws
         #TODO Incorporates races
-        if self.race == Races.dragonborn:
+        if type(self.race) == Races.Dragonborn:
             self.strength.modify_value(2)
             self.charisma.modify_value(1)
             #TODO Add draconic ancestry mecanic to incorporate fire breath
+            
         
         #TODO Incorporates classes
         #TODO Add movement speed
