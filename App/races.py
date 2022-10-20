@@ -1,5 +1,5 @@
 import App.Utilities.shapes as Shapes
-import App.Utilities.units as Units
+import App.items as Items
 
 # A class that is used to implement the race system
 class Race:
@@ -45,6 +45,10 @@ class Dragonborn(Race):
             self.save_abilty = "Constitution"
         else:
             raise RuntimeError("The color entered is not valid for a dragonborn")
+        
+        #TODO: Register the breath as an item (requires level correlation)
+        #TODO: Add damage resistance
+        #TODO: Add language
         
 
 # TODO create a classes for the races below

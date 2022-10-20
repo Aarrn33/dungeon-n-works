@@ -28,26 +28,29 @@ class Unique(Item):
 
 # Adds a class for weapons (ranged and melee)
 class Weapon(Unique):
-    def __init__(self, name: str, damage: Dices.Dice) -> None:
+    def __init__(self, name: str, damage: Dices.Dice, saved_dmg: Dices.Dice) -> None:
         self.name = name
         self.damage = damage
+        self.saved_dmg = saved_dmg
         super().__init__(name)
         self.uuid = self.uuid
         #TODO Add a system to incorporate damage type (ie. piercing)
         
 # Adds a class for melee weapons()
 class Melee(Weapon):
-    def __init__(self, name: str, damage: Dices.Dice) -> None:
+    def __init__(self, name: str, damage: Dices.Dice, saved_dmg: Dices.Dice) -> None:
         self.name = name
         self.damage = damage
+        self.saved_dmg = saved_dmg
         super().__init__(self.name, self.damage)
         self.uuid = self.uuid
 
 #Add a class for ranged weapons
 class Range(Weapon):
-    def __init__(self, name: str, damage: Dices.Dice, n_distance: Units.Distance, l_distance: Units.Distance) -> None:
+    def __init__(self, name: str, damage: Dices.Dice, saved_dmg: Dices.Dice, n_distance: Units.Distance, l_distance: Units.Distance) -> None:
         self.name = name
         self.damage = damage
+        self.saved_dmg = saved_dmg
         super().__init__(name, damage)
         self.uuid = self.uuid
         assert n_distance <= l_distance, "The normal range distance must shoreter then the long distance"

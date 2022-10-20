@@ -12,7 +12,7 @@ class Character:
         self.race = race
         self.chr_class = chr_class
         self.level = 0
-        self.inspiration = 0
+        self.inspiration = False
         self.pb = 2 # Proficiency bonus
         self.inventory = []
         
