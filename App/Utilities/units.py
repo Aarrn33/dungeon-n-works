@@ -1,6 +1,13 @@
+# A class for all units used
+class Unit:
+    def __init__(self, value, unit:str) -> None:
+        self.unit = unit
+        self.value = value
+
+
 # A class used to create and work with distances
 # For instance, it is used to calculate movement speed
-class Distance:
+class Distance(Unit):
     def __init__(self, value: int, unit: str) -> None:
         assert unit in ["m", "ft"], "The unit is not in meters (m) nor in feets (ft) \n Those are the only implemented units for now"
         # The two ifs are used to calculate the value in feet and in meters        
@@ -11,3 +18,10 @@ class Distance:
         elif unit == "ft":
             self.feet = value
             self.meters = round(self.feet*3.28, 3)
+        super().__init__(value, unit)
+        self.unit = self.unit
+
+class Angle(Unit):
+    def __init__(self, value) -> None:
+        super().__init__(value, "°")
+        self.value = self.value

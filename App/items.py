@@ -1,6 +1,6 @@
 import uuid
 import App.Utilities.dice as Dices
-import App.utilities.distances as Distances
+import App.utilities.units as Units
 
 
 # A super class for items
@@ -45,7 +45,7 @@ class Melee(Weapon):
 
 #Add a class for ranged weapons
 class Range(Weapon):
-    def __init__(self, name: str, damage: Dices.Dice, n_distance: Distances.Distance, l_distance: Distances.Distance) -> None:
+    def __init__(self, name: str, damage: Dices.Dice, n_distance: Units.Distance, l_distance: Units.Distance) -> None:
         self.name = name
         self.damage = damage
         super().__init__(name, damage)
