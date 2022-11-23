@@ -27,11 +27,11 @@ class Rectangle(Shape2D):
         self.length = length
         self.width = width
     
-    def area(self):
+    def area(self) -> float:
         # Returns the area of the rectangle
         return self.length * self.width
     
-    def perimeter(self):
+    def perimeter(self) -> float:
         # Returns the perimeter of the rectangle
         return 2*self.length + 2*self.width
 
@@ -44,9 +44,9 @@ class Cone(Shape3D):
         self.radius = round(self.height/math.tan(math.radians(self.angle)), 3)
         self.length = round(math.sqrt(self.height**2 + self.radius**2), 3)
     
-    def volume(self):
+    def volume(self) -> float:
         return round((math.pi * (self.radius**2) * self.height) / 3, 3)
     
-    def surface(self):
+    def surface(self) -> float:
         return math.pi * self.radius * (self.radius + self.length)
         
