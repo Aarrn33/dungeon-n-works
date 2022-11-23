@@ -21,6 +21,7 @@ class Distance(Unit):
         super().__init__(value, unit)
         self.unit = self.unit
 
+# A class used to work with angles (in degrees)
 class Angle(Unit):
     def __init__(self, value: float) -> None:
         super().__init__(value, "°")
