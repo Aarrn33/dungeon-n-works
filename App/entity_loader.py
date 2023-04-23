@@ -87,7 +87,6 @@ class Character:
         # TODO Add inspiration
         # TODO Add proficiency bonus
 
-    def save(self):
         self.saved_data = [self.name,
                            self.race.data,
                            self.chr_class.name,
@@ -119,6 +118,8 @@ class Character:
                            self.performance.value,
                            self.persuasion.value]
         self.saved_data = [str(element) for element in self.saved_data]
+
+    def save(self):
         # Adds a new line between every element for saving
         formated_saved_data = ["\n"] * (len(self.saved_data) * 2 - 1)
         formated_saved_data[0::2] = self.saved_data
