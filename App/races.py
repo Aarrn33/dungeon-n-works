@@ -14,8 +14,8 @@ class Race:
 
 
 class Dragonborn(Race):
-    def __init__(self, name: str, color: str) -> None:
-        self.name = name
+    def __init__(self, color: str):
+        self.name = "Dragonborn"
         super().__init__(self.name)
         self.data = [self.name, self.color]
 
@@ -62,12 +62,71 @@ class Dragonborn(Race):
         # TODO: Add language
 
 
-# TODO create a classes for the races below
-dwarf = Race("Dwarf")
-elf = Race("Elf")
-gnome = Race("Gnome")
-half_elf = Race("Half-Elf")
-halfin = Race("Halfing")
-half_orc = Race("Half-Orc")
-human = Race("Human")
-tiefling = Race("Tiefling")
+# TODO create a classes for the races below -> append find_race function
+class Dwarf(Race):
+    def __init__(self):
+        self.name = "Dwarf"
+        super().__init__(self.name)
+
+
+class Elf(Race):
+    def __init__(self):
+        self.name = "Elf"
+        super().__init__(self.name)
+
+
+class Gnome(Race):
+    def __init__(self):
+        self.name = "Gnome"
+        super().__init__(self.name)
+
+
+class HalfElf(Race):
+    def __init__(self):
+        self.name = "Half-Elf"
+        super().__init__(self.name)
+
+
+class Halfin(Race):
+    def __init__(self):
+        self.name = "Halfin"
+        super().__init__(self.name)
+
+
+class HalfOrc(Race):
+    def __init__(self):
+        self.name = "Half-Orc"
+        super().__init__(self.name)
+
+
+class Human(Race):
+    def __init__(self):
+        self.name = "Human"
+        super().__init__(self.name)
+
+
+class Tiefling(Race):
+    def __init__(self):
+        self.name = "Tiefling"
+        super().__init__(self.name)
+
+
+def find_race(race_data):
+    if race_data[0] == "Dragonborn":
+        return Dragonborn(race_data[1])
+    elif race_data[0] == "Dwarf":
+        return Dwarf()
+    elif race_data[0] == "Elf":
+        return Elf()
+    elif race_data[0] == "Gnome":
+        return Gnome()
+    elif race_data[0] == "Half-Elf":
+        return HalfElf()
+    elif race_data[0] == "Halfin":
+        return Halfin()
+    elif race_data[0] == "Half-Orc":
+        return HalfOrc()
+    elif race_data[0] == "Human":
+        return Human()
+    elif race_data[0] == "Tiefling":
+        return Tiefling()

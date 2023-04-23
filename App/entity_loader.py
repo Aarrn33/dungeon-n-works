@@ -87,7 +87,6 @@ class Character:
         # TODO Add movement speed
         # TODO Add inspiration
         # TODO Add proficiency bonus
-
         self.saved_data = [self.name,
                            self.race.data,
                            self.chr_class.name,
@@ -147,34 +146,34 @@ def character_loader(file_path):
                 pass
         typed_data.append(element)
     name = typed_data[0]
-    race = typed_data[1]
-    chr_class = typed_data[2]
+    race = Races.find_race(typed_data[1])
+    chr_class = Classes.find_class(typed_data[2])
     level = typed_data[3]
     inventory = typed_data[4]
-    strength = typed_data[5]
-    wisdom = typed_data[6]
-    charisma = typed_data[7]
-    dexterity = typed_data[8]
-    intelligence = typed_data[9]
-    constitution = typed_data[10]
-    athletics = typed_data[11]
-    acrobatics = typed_data[12]
-    sleight_of_hand = typed_data[13]
-    stealth = typed_data[14]
-    arcana = typed_data[15]
-    history = typed_data[16]
-    investigation = typed_data[17]
-    nature = typed_data[18]
-    religion = typed_data[19]
-    animal_handling = typed_data[20]
-    insight = typed_data[21]
-    medicine = typed_data[22]
-    perception = typed_data[23]
-    survival = typed_data[24]
-    deception = typed_data[25]
-    intimidation = typed_data[26]
-    performance = typed_data[27]
-    persuasion = typed_data[28]
+    strength = Abilities.Strength(typed_data[5])
+    wisdom = Abilities.Wisdom(typed_data[6])
+    charisma = Abilities.Charisma(typed_data[7])
+    dexterity = Abilities.Dexterity(typed_data[8])
+    intelligence = Abilities.Intelligence(typed_data[9])
+    constitution = Abilities.Constitution(typed_data[10])
+    athletics = Skills.Athletics(typed_data[11])
+    acrobatics = Skills.Acrobatics(typed_data[12])
+    sleight_of_hand = Skills.Sleight_of_Hand(typed_data[13])
+    stealth = Skills.Stealth(typed_data[14])
+    arcana = Skills.Arcana(typed_data[15])
+    history = Skills.History(typed_data[16])
+    investigation = Skills.Investigation(typed_data[17])
+    nature = Skills.Nature(typed_data[18])
+    religion = Skills.Religion(typed_data[19])
+    animal_handling = Skills.Animal_Handling(typed_data[20])
+    insight = Skills.Insight(typed_data[21])
+    medicine = Skills.Medicine(typed_data[22])
+    perception = Skills.Perception(typed_data[23])
+    survival = Skills.Survival(typed_data[24])
+    deception = Skills.Deception(typed_data[25])
+    intimidation = Skills.Intimidation(typed_data[26])
+    performance = Skills.Performance(typed_data[27])
+    persuasion = Skills.Persuasion(typed_data[28])
     character = Character(name,
                           race,
                           chr_class,

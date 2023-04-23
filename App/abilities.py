@@ -6,9 +6,9 @@ from math import floor
 
 
 class Ability:
-    def __init__(self, name: str):
+    def __init__(self, name: str, value: int):
         self.name = name
-        self.value = dice.d6.roll(3)
+        self.value = value
         self.modifier = score2modifier.score_2_modifier(self.value)
 
     def modify_value(self, factor: int):
@@ -23,36 +23,42 @@ class Ability:
 
 
 class Strength(Ability):
-    def __init__(self):
+    def __init__(self, value: int = dice.d6.roll(3)):
         self.name = "Strength"
-        super().__init__(self.name)
+        self.value = value
+        super().__init__(self.name, self.value)
 
 
 class Wisdom(Ability):
-    def __init__(self):
+    def __init__(self, value: int = dice.d6.roll(3)):
         self.name = "Wisdom"
-        super().__init__(self.name)
+        self.value = value
+        super().__init__(self.name, self.value)
 
 
 class Charisma(Ability):
-    def __init__(self):
+    def __init__(self, value: int = dice.d6.roll(3)):
         self.name = "Charisma"
-        super().__init__(self.name)
+        self.value = value
+        super().__init__(self.name, self.value)
 
 
 class Dexterity(Ability):
-    def __init__(self):
+    def __init__(self, value: int = dice.d6.roll(3)):
         self.name = "Dexterity"
-        super().__init__(self.name)
+        self.value = value
+        super().__init__(self.name, self.value)
 
 
 class Intelligence(Ability):
-    def __init__(self):
+    def __init__(self, value: int = dice.d6.roll(3)):
         self.name = "Intelligence"
-        super().__init__(self.name)
+        self.value = value
+        super().__init__(self.name, self.value)
 
 
 class Constitution(Ability):
-    def __init__(self):
+    def __init__(self, value: int = dice.d6.roll(3)):
         self.name = "Constitution"
-        super().__init__(self.name)
+        self.value = value
+        super().__init__(self.name, self.value)

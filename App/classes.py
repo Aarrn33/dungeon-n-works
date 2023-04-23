@@ -14,5 +14,21 @@ class Class:
         self.data = [name]
 
 
-fighter = Class("Fighter", dice.d10, ["Strength", "Constitution"], [
-                "Acrobatics", "Animal Handling", "Athletics", "History", "Insight", "Intimidation", "Perception"], 2)
+class Fighter(Class):
+    def __init__(self):
+        self.name = "Fighter"
+        self.hd = dice.d10
+        self.st = ["Strength", "Constitution"]
+        self.skills = ["Acrobatics", "Animal Handling", "Athletics",
+                       "History", "Insight", "Intimidation", "Perception"]
+        self.nbskills = 2
+        super().__init__(self.name, self.hd, self.st, self.skills, self.nbskills)
+
+# TODO Add Python classes for other DnD classes -> append find_class function
+
+
+def find_class(class_data):
+    if isinstance(class_data, str):
+        class_data = [class_data]
+    if class_data[0] == "Fighter":
+        return Fighter()

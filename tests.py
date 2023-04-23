@@ -2,7 +2,7 @@ import App.entity_loader as Entities
 import App.races as Races
 import App.classes as Classes
 
-Legolis = Entities.Character("Legolis", Races.human, Classes.fighter)
+Legolis = Entities.Character("Legolis", Races.Human(), Classes.Fighter())
 # Shows every attribute of Legolis
 for attribute in dir(Legolis):
     if attribute[0] != "_":
