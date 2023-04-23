@@ -62,8 +62,16 @@ class Character:
         if type(self.race) == Races.Dragonborn:
             self.strength.modify_value(2)
             self.charisma.modify_value(1)
-            #TODO Add draconic ancestry mecanic to incorporate fire breath
+            #TODO Add draconic ancestry mechanic to incorporate fire breath
             
         
         #TODO Incorporates classes
         #TODO Add movement speed
+        
+        self.data = [self.name, self.race, self.chr_class, self.level, self.inspiration, self.pb, self.inventory, self.strength.value, self.wisdom.value, self.charisma.value, self.dexterity.value, self.intelligence.value, self.constitution.value]
+        
+        
+    def save_char(self):
+        file_name = self.name+".txt"
+        with open(file_name, "w"):
+            pass
