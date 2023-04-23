@@ -9,6 +9,9 @@ class Class:
         self.st = st  # Skills which have saving throws
         self.skills = skills  # Skills that the player can choose to have proficiency in
         self.nbskills = nbskills  # Number of those skills that the plyer can choose
+        # TODO add the ability for users to choose the skills they are proficient in
+        # TODO add choosen proficiencies and potentially more
+        self.data = [name]
 
 
 fighter = Class("Fighter", dice.d10, ["Strength", "Constitution"], [

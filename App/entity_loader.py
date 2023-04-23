@@ -90,7 +90,7 @@ class Character:
     def save(self):
         self.saved_data = [self.name,
                            self.race.data,
-                           self.chr_class,
+                           self.chr_class.name,
                            self.level,
                            self.inventory,
                            self.strength.value,
@@ -118,7 +118,10 @@ class Character:
                            self.intimidation.value,
                            self.performance.value,
                            self.persuasion.value]
-
+        self.saved_data = [str(element) for element in self.saved_data]
+        # Adds a new line between every element for saving
+        formated_saved_data = ["\n"] * (len(self.saved_data) * 2 - 1)
+        formated_saved_data[0::2] = self.saved_data
         file_name = self.name+".txt"
         with open(file_name, "w") as file:
-            file.writelines(self.saved_data)
+            file.writelines(formated_saved_data)
