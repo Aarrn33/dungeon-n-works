@@ -5,8 +5,10 @@ import App.items as Items
 
 
 class Race:
-    def __init__(self, name: str):
+    def __init__(self, name: str, variant: str = "standard"):
         self.name = name
+        self.variant = variant
+        self.data = [name, variant]
 
 # Classes incorporating races
 
@@ -15,6 +17,7 @@ class Dragonborn(Race):
     def __init__(self, name: str, color: str) -> None:
         self.name = name
         super().__init__(self.name)
+        self.data = [self.name, self.color]
 
         # This section is used to determined the caracteristics of the draconic ancestry capa
         # Checks if it is a valid color
