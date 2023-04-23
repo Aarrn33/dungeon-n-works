@@ -1,6 +1,6 @@
 import uuid
 import App.Utilities.dice as Dices
-import App.utilities.units as Units
+import App.Utilities.units as Units
 
 
 # A super class for items
