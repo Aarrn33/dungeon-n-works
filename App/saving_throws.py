@@ -3,4 +3,4 @@
 # A saving throw for dexterity for exemple is equal to
 # d20 + dex modifier + advantage + proficiency + saving throw bonus for dexterity
 
-#TODO: Implement mechanic
+# TODO: Implement mechanic
