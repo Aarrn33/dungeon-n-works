@@ -126,3 +126,23 @@ class Character:
         file_name = self.name+".txt"
         with open(file_name, "w") as file:
             file.writelines(formated_saved_data)
+
+
+def character_loader(file_path):
+    with open(file_path, "r")as file:
+        raw_data = file.read()
+    raw_data = raw_data.split("\n")
+    typed_data = []
+    for element in raw_data:
+        if isinstance(element, str):
+            try:
+                element = int(element)
+            except ValueError:
+                pass
+        if isinstance(element, str):
+            try:
+                element = eval(element)
+            except NameError:
+                pass
+        typed_data.append(element)
+    return typed_data
