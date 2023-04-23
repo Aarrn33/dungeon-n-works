@@ -8,6 +8,7 @@ import App.Utilities.dice as Dice
 import App.Utilities.score2modifier as Score2Modifier
 
 Legolis = Characters.Character("Legolis", Races.human, Classes.fighter)
-for attribute in dir(Legolis):
-    if attribute[0] != "_":
-        print(attribute, ":", Legolis.__getattribute__(attribute))
+# Shows every attribute of Legolis
+# for attribute in dir(Legolis):
+#     if attribute[0] != "_":
+#         print(attribute, ":", Legolis.__getattribute__(attribute))

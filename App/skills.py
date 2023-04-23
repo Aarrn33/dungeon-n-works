@@ -26,8 +26,6 @@ class Athletics(Skill):
         self.name = "Athletics"
         self.dependancy = dependancy
         super().__init__(self.name, self.dependancy)
-        self.value = self.value
-        self.modifier = self.modifier
 
 # Dexterity dependants
 class Acrobatics(Skill):
@@ -35,22 +33,16 @@ class Acrobatics(Skill):
         self.name = "Acrobatics"
         self.dependancy = dependancy
         super().__init__(self.name, self.dependancy)
-        self.value = self.value
-        self.modifier = self.modifier
 class Sleight_of_Hand(Skill):
     def __init__(self, dependancy: Abilities.Dexterity()):
         self.name = "Sleight of Hand"
         self.dependancy = dependancy
         super().__init__(self.name, self.dependancy)
-        self.value = self.value
-        self.modifier = self.modifier
 class Stealth(Skill):
     def __init__(self, dependancy: Abilities.Dexterity()):
         self.name = "Stealth"
         self.dependancy = dependancy
         super().__init__(self.name, self.dependancy)
-        self.value = self.value
-        self.modifier = self.modifier
 
 # Intelligence dependants
 class Arcana(Skill):
@@ -58,36 +50,26 @@ class Arcana(Skill):
         self.name = "Arcana"
         self.dependancy = dependancy
         super().__init__(self.name, self.dependancy)
-        self.value = self.value
-        self.modifier = self.modifier
 class History(Skill):
     def __init__(self, dependancy: Abilities.Intelligence()):
         self.name = "History"
         self.dependancy = dependancy
         super().__init__(self.name, self.dependancy)
-        self.value = self.value
-        self.modifier = self.modifier
 class Investigation(Skill):
     def __init__(self, dependancy: Abilities.Intelligence()):
         self.name = "Investigation"
         self.dependancy = dependancy
         super().__init__(self.name, self.dependancy)
-        self.value = self.value
-        self.modifier = self.modifier
 class Nature(Skill):
     def __init__(self, dependancy: Abilities.Intelligence()):
         self.name = "Nature"
         self.dependancy = dependancy
         super().__init__(self.name, self.dependancy)
-        self.value = self.value
-        self.modifier = self.modifier
 class Religion(Skill):
     def __init__(self, dependancy: Abilities.Intelligence()):
         self.name = "Religion"
         self.dependancy = dependancy
         super().__init__(self.name, self.dependancy)
-        self.value = self.value
-        self.modifier = self.modifier
 
 # Wisdom dependants
 class Animal_Handling(Skill):
@@ -95,36 +77,26 @@ class Animal_Handling(Skill):
         self.name = "Animal Handling"
         self.dependancy = dependancy
         super().__init__(self.name, self.dependancy)
-        self.value = self.value
-        self.modifier = self.modifier
 class Insight(Skill):
     def __init__(self, dependancy: Abilities.Wisdom()):
         self.name = "Insight"
         self.dependancy = dependancy
         super().__init__(self.name, self.dependancy)
-        self.value = self.value
-        self.modifier = self.modifier
 class Medicine(Skill):
     def __init__(self, dependancy: Abilities.Wisdom()):
         self.name = "Medicine"
         self.dependancy = dependancy
         super().__init__(self.name, self.dependancy)
-        self.value = self.value
-        self.modifier = self.modifier
 class Perception(Skill):
     def __init__(self, dependancy: Abilities.Wisdom()):
         self.name = "Perception"
         self.dependancy = dependancy
         super().__init__(self.name, self.dependancy)
-        self.value = self.value
-        self.modifier = self.modifier
 class Survival(Skill):
     def __init__(self, dependancy: Abilities.Wisdom()):
         self.name = "Survival"
         self.dependancy = dependancy
         super().__init__(self.name, self.dependancy)
-        self.value = self.value
-        self.modifier = self.modifier
 
 # Charisma dependats
 class Deception(Skill):
@@ -132,29 +104,21 @@ class Deception(Skill):
         self.name = "Deception"
         self.dependancy = dependancy
         super().__init__(self.name, self.dependancy)
-        self.value = self.value
-        self.modifier = self.modifier
 class Intimidation(Skill):
     def __init__(self, dependancy: Abilities.Charisma()):
         self.name = "Intimidation"
         self.dependancy = dependancy
         super().__init__(self.name, self.dependancy)
-        self.value = self.value
-        self.modifier = self.modifier
 class Performance(Skill):
     def __init__(self, dependancy: Abilities.Charisma()):
         self.name = "Performance"
         self.dependancy = dependancy
         super().__init__(self.name, self.dependancy)
-        self.value = self.value
-        self.modifier = self.modifier
 class Persuasion(Skill):
     def __init__(self, dependancy: Abilities.Charisma()):
         self.name = "Persuasion"
         self.dependancy = dependancy
         super().__init__(self.name, self.dependancy)
-        self.value = self.value
-        self.modifier = self.modifier
 
 
 #Adds classes per ability dependancy
