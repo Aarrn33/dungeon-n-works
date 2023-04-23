@@ -8,6 +8,6 @@ import App.Utilities.dice as Dice
 import App.Utilities.score2modifier as Score2Modifier
 
 Legolis = Characters.Character("Legolis", Races.human, Classes.fighter)
-print(Legolis.ac)
-print(Legolis.deception.modifier)
-print(Legolis.intimidation.value)
+for attribute in dir(Legolis):
+    if attribute[0] != "_":
+        print(attribute, ":", Legolis.__getattribute__(attribute))
