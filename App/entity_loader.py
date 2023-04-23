@@ -7,7 +7,8 @@ import App.skills as Skills
 
 
 class Character:
-    def __init__(self, name: str,
+    def __init__(self,
+                 name: str,
                  race: Races.Race,
                  chr_class: Classes.Class,
                  level: int = 0,
@@ -145,4 +146,60 @@ def character_loader(file_path):
             except NameError:
                 pass
         typed_data.append(element)
-    return typed_data
+    name = typed_data[0]
+    race = typed_data[1]
+    chr_class = typed_data[2]
+    level = typed_data[3]
+    inventory = typed_data[4]
+    strength = typed_data[5]
+    wisdom = typed_data[6]
+    charisma = typed_data[7]
+    dexterity = typed_data[8]
+    intelligence = typed_data[9]
+    constitution = typed_data[10]
+    athletics = typed_data[11]
+    acrobatics = typed_data[12]
+    sleight_of_hand = typed_data[13]
+    stealth = typed_data[14]
+    arcana = typed_data[15]
+    history = typed_data[16]
+    investigation = typed_data[17]
+    nature = typed_data[18]
+    religion = typed_data[19]
+    animal_handling = typed_data[20]
+    insight = typed_data[21]
+    medicine = typed_data[22]
+    perception = typed_data[23]
+    survival = typed_data[24]
+    deception = typed_data[25]
+    intimidation = typed_data[26]
+    performance = typed_data[27]
+    persuasion = typed_data[28]
+    character = Character(name,
+                          race,
+                          chr_class,
+                          level,
+                          inventory,
+                          strength,
+                          wisdom,
+                          charisma,
+                          dexterity,
+                          intelligence,
+                          constitution,
+                          athletics,
+                          acrobatics,
+                          sleight_of_hand,
+                          stealth, arcana,
+                          history,
+                          investigation,
+                          nature,
+                          religion,
+                          animal_handling,
+                          insight, medicine,
+                          perception,
+                          survival,
+                          deception,
+                          intimidation,
+                          performance,
+                          persuasion, )
+    return character
