@@ -145,60 +145,33 @@ def character_loader(file_path):
             except NameError:
                 pass
         typed_data.append(element)
-    name = typed_data[0]
-    race = Races.find_race(typed_data[1])
-    chr_class = Classes.find_class(typed_data[2])
-    level = typed_data[3]
-    inventory = typed_data[4]
-    strength = Abilities.Strength(typed_data[5])
-    wisdom = Abilities.Wisdom(typed_data[6])
-    charisma = Abilities.Charisma(typed_data[7])
-    dexterity = Abilities.Dexterity(typed_data[8])
-    intelligence = Abilities.Intelligence(typed_data[9])
-    constitution = Abilities.Constitution(typed_data[10])
-    athletics = Skills.Athletics(typed_data[11])
-    acrobatics = Skills.Acrobatics(typed_data[12])
-    sleight_of_hand = Skills.Sleight_of_Hand(typed_data[13])
-    stealth = Skills.Stealth(typed_data[14])
-    arcana = Skills.Arcana(typed_data[15])
-    history = Skills.History(typed_data[16])
-    investigation = Skills.Investigation(typed_data[17])
-    nature = Skills.Nature(typed_data[18])
-    religion = Skills.Religion(typed_data[19])
-    animal_handling = Skills.Animal_Handling(typed_data[20])
-    insight = Skills.Insight(typed_data[21])
-    medicine = Skills.Medicine(typed_data[22])
-    perception = Skills.Perception(typed_data[23])
-    survival = Skills.Survival(typed_data[24])
-    deception = Skills.Deception(typed_data[25])
-    intimidation = Skills.Intimidation(typed_data[26])
-    performance = Skills.Performance(typed_data[27])
-    persuasion = Skills.Persuasion(typed_data[28])
-    character = Character(name,
-                          race,
-                          chr_class,
-                          level,
-                          inventory,
-                          strength,
-                          wisdom,
-                          charisma,
-                          dexterity,
-                          intelligence,
-                          constitution,
-                          athletics,
-                          acrobatics,
-                          sleight_of_hand,
-                          stealth, arcana,
-                          history,
-                          investigation,
-                          nature,
-                          religion,
-                          animal_handling,
-                          insight, medicine,
-                          perception,
-                          survival,
-                          deception,
-                          intimidation,
-                          performance,
-                          persuasion, )
+    character = Character(typed_data[0],
+                          Races.find_race(typed_data[1]),
+                          Classes.find_class(typed_data[2]),
+                          typed_data[3],
+                          typed_data[4],
+                          Abilities.Strength(typed_data[5]),
+                          Abilities.Wisdom(typed_data[6]),
+                          Abilities.Charisma(typed_data[7]),
+                          Abilities.Dexterity(typed_data[8]),
+                          Abilities.Intelligence(typed_data[9]),
+                          Abilities.Constitution(typed_data[10]),
+                          Skills.Athletics(typed_data[11]),
+                          Skills.Acrobatics(typed_data[12]),
+                          Skills.Sleight_of_Hand(typed_data[13]),
+                          Skills.Stealth(typed_data[14]),
+                          Skills.Arcana(typed_data[15]),
+                          Skills.History(typed_data[16]),
+                          Skills.Investigation(typed_data[17]),
+                          Skills.Nature(typed_data[18]),
+                          Skills.Religion(typed_data[19]),
+                          Skills.Animal_Handling(typed_data[20]),
+                          Skills.Insight(typed_data[21]),
+                          Skills.Medicine(typed_data[22]),
+                          Skills.Perception(typed_data[23]),
+                          Skills.Survival(typed_data[24]),
+                          Skills.Deception(typed_data[25]),
+                          Skills.Intimidation(typed_data[26]),
+                          Skills.Performance(typed_data[27]),
+                          Skills.Persuasion(typed_data[28]), )
     return character
