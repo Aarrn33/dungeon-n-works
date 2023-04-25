@@ -123,7 +123,7 @@ class Character:
         # Adds a new line between every element for saving
         formated_saved_data = ["\n"] * (len(self.saved_data) * 2 - 1)
         formated_saved_data[0::2] = self.saved_data
-        file_name = self.name+".txt"
+        file_name = r'App\\Entities\\Characters\\' + self.name + ".txt"
         with open(file_name, "w") as file:
             file.writelines(formated_saved_data)
 
