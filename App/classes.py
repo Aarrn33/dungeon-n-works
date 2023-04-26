@@ -15,7 +15,7 @@ class Class:
                 if skill not in self.skills:
                     self.chosen_skills = []
                     print(
-                        "Something went wrong will trying to parse the proficient skills, those have been deleted and you'll be able to choose new ones")
+                        "Something went wrong will trying to parse the proficient skills")
         if self.chosen_skills == []:  # If no chosen skills were provided, or if the previous test failed
             skills_to_choose = self.skills
             num_of_chosen_skills = 0
