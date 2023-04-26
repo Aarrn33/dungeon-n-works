@@ -128,7 +128,7 @@ class Character:
             file.writelines(formated_saved_data)
 
 
-def character_loader(file_path):
+def load(file_path):
     with open(file_path, "r")as file:
         raw_data = file.read()
     raw_data = raw_data.split("\n")
