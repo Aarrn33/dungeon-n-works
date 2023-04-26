@@ -202,7 +202,7 @@ def load(file_path):
         typed_data.append(element)
     character = Character(typed_data[0],
                           Races.find_race(typed_data[1]),
-                          Classes.find_class(typed_data[2][0]),
+                          Classes.find_class(typed_data[2]),
                           typed_data[3],
                           typed_data[4],
                           Abilities.Strength(typed_data[5]),
