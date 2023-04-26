@@ -112,6 +112,9 @@ class Tiefling(Race):
 
 
 def find_race(race_data):
+    if type(race_data) == str:
+        race_data = [race_data]
+
     if race_data[0] == "Dragonborn":
         return Dragonborn(race_data[1])
     elif race_data[0] == "Dwarf":

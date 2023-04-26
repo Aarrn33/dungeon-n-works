@@ -8,7 +8,7 @@ class Class:
         self.hd = hd  # Hit dice
         self.st = st  # Skills which have saving throws
         self.skills = skills  # Skills that the player can choose to have proficiency in
-        self.nbskills = nbskills  # Number of those skills that the plyer can choose
+        self.nbskills = nbskills  # Number of those skills that the player can choose
         self.chosen_skills = chosen_skills
         if self.chosen_skills != []:
             for skill in self.chosen_skills:

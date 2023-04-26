@@ -127,6 +127,58 @@ class Character:
         with open(file_name, "w") as file:
             file.writelines(formated_saved_data)
 
+    def find_ability(self, ability_name):
+        if ability_name == "Strength":
+            return self.strength
+        elif ability_name == "Wisdom":
+            return self.wisdom
+        elif ability_name == "Charisma":
+            return self.charisma
+        elif ability_name == "Dexterity":
+            return self.dexterity
+        elif ability_name == "Intelligence":
+            return self.intelligence
+        elif ability_name == "Constitution":
+            return self.constitution
+        
+    def find_skill(self, skill_name):
+        if skill_name == "Athletics":
+            return self.athletics
+        elif skill_name == "Acrobatics":
+            return self.acrobatics
+        elif skill_name == "Sleight of Hand":
+            return self.sleight_of_hand
+        elif skill_name == "Stealth":
+            return self.stealth
+        elif skill_name == "Arcana":
+            return self.arcana
+        elif skill_name == "History":
+            return self.history
+        elif skill_name == "Investigation":
+            return self.investigation
+        elif skill_name == "Nature":
+            return self.nature
+        elif skill_name == "Religion":
+            return self.religion
+        elif skill_name == "Animal Handling":
+            return self.animal_handling
+        elif skill_name == "Insight":
+            return self.insight
+        elif skill_name == "Medicine":
+            return self.medicine
+        elif skill_name == "Perception":
+            return self.perception
+        elif skill_name == "Survival":
+            return self.survival
+        elif skill_name == "Deception":
+            return self.deception
+        elif skill_name == "Intimidation":
+            return self.intimidation
+        elif skill_name == "Performance":
+            return self.performance
+        elif skill_name == "Persuasion":
+            return self.persuasion
+
 
 def load(file_path):
     with open(file_path, "r")as file:
