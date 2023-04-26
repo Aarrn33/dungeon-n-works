@@ -1,6 +1,6 @@
 Senku Ishigami
 ['Human', 'standard']
-['Fighter', ['Animal Handling', 'Perception']]
+['Fighter', ['Surival', 'Perception']]
 4
 ["Alchemist's Supplies", 'Chain Mail', 'Common Clothes', '38 Crossbow Bolts', 'Heavy Crossbow', '2 Longswords', 'Iron Pot', 'Shield', 'Shovel', 'Bedroll', 'Manticore Tail Spikes', 'Mess Kit', 'Potion of Healing', 'Tinderbox', 'Waterskin']
 11
