@@ -83,13 +83,16 @@ class Character:
         self.performance = performance
         self.persuasion = persuasion
 
+        for skill in chr_class.chosen_skills:
+            self.find_skill(skill).modify_value(1)
+
         # TODO Incorporate saving throws
         # TODO Add movement speed
         # TODO Add inspiration
         # TODO Add proficiency bonus
         self.saved_data = [self.name,
                            self.race.data,
-                           self.chr_class.name,
+                           self.chr_class.data,
                            self.level,
                            self.inventory,
                            self.strength.value,
@@ -140,7 +143,7 @@ class Character:
             return self.intelligence
         elif ability_name == "Constitution":
             return self.constitution
-        
+
     def find_skill(self, skill_name):
         if skill_name == "Athletics":
             return self.athletics
@@ -199,7 +202,7 @@ def load(file_path):
         typed_data.append(element)
     character = Character(typed_data[0],
                           Races.find_race(typed_data[1]),
-                          Classes.find_class(typed_data[2]),
+                          Classes.find_class(typed_data[2][0]),
                           typed_data[3],
                           typed_data[4],
                           Abilities.Strength(typed_data[5]),
