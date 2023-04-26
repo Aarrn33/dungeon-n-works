@@ -142,7 +142,7 @@ def character_loader(file_path):
         if isinstance(element, str):
             try:
                 element = eval(element)
-            except NameError:
+            except (SyntaxError, NameError):
                 pass
         typed_data.append(element)
     character = Character(typed_data[0],

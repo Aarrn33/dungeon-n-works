@@ -1,5 +1,6 @@
 # Custom files to ignore
 tests.py
+App/*.txt
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

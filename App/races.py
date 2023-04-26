@@ -8,7 +8,7 @@ class Race:
     def __init__(self, name: str, variant: str = "standard"):
         self.name = name
         self.variant = variant
-        self.data = [name, variant]
+        self.data = [self.name, self.variant]
 
 # Classes incorporating races
 
