@@ -1,18 +1,19 @@
-import uuid
 import App.Utilities.dice as Dices
 import App.Utilities.units as Units
 
-
+# TODO Add weight quantity and a description for items
 # A super class for items
+
+
 class Item:
-    def __init__(self, name: str) -> None:
+    def __init__(self, name: str):
         self.name = name
 
 # A class for stackable items (ie. torches)
 
 
 class Stackable(Item):
-    def __init__(self, name: str, quantity: int = 1) -> None:
+    def __init__(self, name: str, quantity: int = 1):
         self.name = name
         self.quantity = quantity
         super().__init__(self.name)
@@ -20,14 +21,14 @@ class Stackable(Item):
 
 # TODO Add class for measurable items (ie. ropes)
 # TODO Add class for ammunition (ie. arrows)
+# TODO Add class for special kinds of items (ie. spells)
 
-# Add class for unique items (ie.weapons)
+# Adds a class for unique items (not stackables)
 
 
 class Unique(Item):
     def __init__(self, name: str) -> None:
         self.name = name
-        self.uuid = uuid.uuid4()
         super().__init__(self.name)
 
 # Adds a class for weapons (ranged and melee)
