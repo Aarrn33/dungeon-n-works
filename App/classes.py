@@ -3,7 +3,7 @@ import App.Utilities.dice as dice
 
 
 class Class:
-    def __init__(self, name: str, hd: dice.Dice, st: list, skills: list, nbskills: int, chosen_skills: list = []):
+    def __init__(self, name: str, hd: dice.Dice, st: list, skills: list, nbskills: int, chosen_skills = []):
         self.name = name  # Name of the class
         self.hd = hd  # Hit dice
         self.st = st  # Skills which have saving throws
@@ -12,6 +12,8 @@ class Class:
         self.chosen_skills = chosen_skills  # The skill the user is actually proficient in
         # Checks if the user entered proficient skills are actually valid
         if self.chosen_skills != []:
+            if type(self.chosen_skills) != list:
+                self.chosen_skills = []
             for skill in self.chosen_skills:
                 if skill not in self.skills:
                     self.chosen_skills = []

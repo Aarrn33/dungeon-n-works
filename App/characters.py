@@ -37,6 +37,7 @@ class Character:
                  intimidation: Skills.Intimidation = Skills.Intimidation(),
                  performance: Skills.Performance = Skills.Performance(),
                  persuasion: Skills.Persuasion = Skills.Persuasion(),
+                 hp: int = 0,
                  ):
 
         # Assigns main identifiers
@@ -86,6 +87,10 @@ class Character:
         for skill in chr_class.chosen_skills:
             self.find_skill(skill).modify_value(1)
 
+        self.hp = hp
+        if self.hp == 0:
+            self.hp = self.chr_class.hd.roll()
+
         # TODO Incorporate saving throws
         # TODO Add movement speed
         # TODO Add inspiration
@@ -119,7 +124,10 @@ class Character:
                            self.deception.value,
                            self.intimidation.value,
                            self.performance.value,
-                           self.persuasion.value]
+                           self.persuasion.value,
+                           self.hp,
+                           ]
+
         self.saved_data = [str(element) for element in self.saved_data]
 
     def save(self):
@@ -228,5 +236,7 @@ def load(file_path):
                           Skills.Deception(typed_data[25]),
                           Skills.Intimidation(typed_data[26]),
                           Skills.Performance(typed_data[27]),
-                          Skills.Persuasion(typed_data[28]), )
+                          Skills.Persuasion(typed_data[28]),
+                          typed_data[29],
+                          )
     return character
