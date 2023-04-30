@@ -96,6 +96,9 @@ class Character:
         # TODO Add movement speed
         # TODO Add inspiration
         # TODO Add proficiency bonus
+        
+        self.update()
+        
         self.saved_data = [self.name,
                            self.race.data,
                            self.chr_class.data,
@@ -130,6 +133,10 @@ class Character:
                            ]
 
         self.saved_data = [str(element) for element in self.saved_data]
+
+    def update(self):
+        self.level = self.exp2level()
+        self.ac = 10 + self.dexterity.modifier
 
     def save(self):
         # Adds a new line between every element for saving
