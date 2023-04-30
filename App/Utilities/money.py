@@ -1,14 +1,14 @@
 import math
+import App.items as Items
 
-# TODO Make coinage a subclass of item
 
-
-class Coinage():
+class Coinage(Items.Stackable):
     def __init__(self, cp_value: int, name: str):
         self.cp_value = cp_value
         self.name = name
         assert self.name in ["Copper piece", "Silver piece", "Electrum piece", "Gold piece",
                              "Platinum piece"], "The chosen coinage is not valid in DnD"
+        super().__init__(self.name)
 
     def convert(self, end_coinage):
         assert isinstance(
