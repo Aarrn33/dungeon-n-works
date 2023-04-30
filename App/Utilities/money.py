@@ -1,14 +1,15 @@
 import math
 import App.items as Items
+import App.Utilities.units as Units
 
 
 class Coinage(Items.Stackable):
-    def __init__(self, cp_value: int, name: str):
-        self.cp_value = cp_value
+    def __init__(self, name: str, cp_value: int):
         self.name = name
         assert self.name in ["Copper piece", "Silver piece", "Electrum piece", "Gold piece",
                              "Platinum piece"], "The chosen coinage is not valid in DnD"
-        super().__init__(self.name)
+        super().__init__(self.name, Units.Weight(0.02, "lb"), cp_value
+                         )
 
     def convert(self, end_coinage):
         assert isinstance(
@@ -23,46 +24,36 @@ class Coinage(Items.Stackable):
 class CP(Coinage):
     def __init__(self, number: int = 1):
         self.number = number
-        self.name = "Copper piece"
         self.abbreviation = "cp"
-        self.cp_value = 1*number
-        super().__init__(self.cp_value, self.name)
+        super().__init__("Copper piece", 1*number)
 
 
 class SP(Coinage):
     def __init__(self, number: int = 1):
         self.number = number
-        self.name = "Silver piece"
         self.abbreviation = "sp"
-        self.cp_value = 10*number
-        super().__init__(self.cp_value, self.name)
+        super().__init__("Silver piece", 10*number)
 
 
 class EP(Coinage):
     def __init__(self, number: int = 1):
         self.number = number
-        self.name = "Electrum piece"
         self.abbreviation = "ep"
-        self.cp_value = 50*number
-        super().__init__(self.cp_value, self.name)
+        super().__init__("Electrum piece", 50*number)
 
 
 class GP(Coinage):
     def __init__(self, number: int = 1):
         self.number = number
-        self.name = "Gold piece"
         self.abbreviation = "gp"
-        self.cp_value = 100*number
-        super().__init__(self.cp_value, self.name)
+        super().__init__("Gold piece", 100*number)
 
 
 class PP(Coinage):
     def __init__(self, number: int = 1):
         self.number = number
-        self.name = "Platinum piece"
         self.abbreviation = "pp"
-        self.cp_value = 1000*number
-        super().__init__(self.cp_value, self.name)
+        super().__init__("Platinum piece", 1000*number)
 
 
 # Addes easily accessible one coin objects
