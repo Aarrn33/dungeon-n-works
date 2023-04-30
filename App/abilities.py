@@ -1,4 +1,3 @@
-import App.Utilities.score2modifier as score2modifier
 import App.Utilities.dice as dice
 from math import floor
 
@@ -9,15 +8,18 @@ class Ability:
     def __init__(self, name: str, value: int):
         self.name = name
         self.value = value
-        self.modifier = score2modifier.score_2_modifier(self.value)
+        self.modifier = self.score_2_modifier(self.value)
 
     def modify_value(self, factor: int):
         self.value += factor
-        self.modifier = score2modifier.score_2_modifier(self.value)
+        self.modifier = self.score_2_modifier(self.value)
 
     def modify_modifier(self, factor: int):
         self.modifier += factor
         self.value = floor((self.modifier*2)+10)
+    
+    def score_2_modifier(score: int) -> int:
+        return floor((score-10)/2)
 
 # Adds classes for each ability
 

@@ -1,5 +1,4 @@
 import App.abilities as Abilities
-import App.Utilities.score2modifier as score2modifier
 from math import floor
 
 # A class that implements the skills deriving from the abilities
@@ -14,15 +13,18 @@ class Skill:
             self.value = self.dependancy.value
             self.modifier = self.dependancy.modifier
         else:
-            self.modifier = score2modifier.score_2_modifier(self.value)
+            self.modifier = self.score_2_modifier(self.value)
 
     def modify_value(self, factor: int):
         self.value += factor
-        self.modifier = score2modifier.score_2_modifier(self.value)
+        self.modifier = self.score_2_modifier(self.value)
 
     def modify_modifier(self, factor: int):
         self.modifier += factor
         self.value = floor((self.modifier*2)+10)
+
+    def score_2_modifier(score: int) -> int:
+        return floor((score-10)/2)
 
 
 # Adds classes for each skill
