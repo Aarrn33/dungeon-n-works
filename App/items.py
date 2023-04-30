@@ -35,7 +35,7 @@ class Unique(Item):
 
 
 class Weapon(Unique):
-    def __init__(self, name: str, damage: Dices.Dice, saved_dmg: Dices.Dice) -> None:
+    def __init__(self, name: str, damage: Dices.Dice, saved_dmg: Dices.Dice):
         self.name = name
         self.damage = damage
         self.saved_dmg = saved_dmg
@@ -47,10 +47,9 @@ class Weapon(Unique):
 
 
 class Melee(Weapon):
-    def __init__(self, name: str, damage: Dices.Dice, saved_dmg: Dices.Dice) -> None:
+    def __init__(self, name: str, damage: Dices.Dice):
         self.name = name
         self.damage = damage
-        self.saved_dmg = saved_dmg
         super().__init__(self.name, self.damage)
         self.uuid = self.uuid
 
@@ -58,7 +57,7 @@ class Melee(Weapon):
 
 
 class Range(Weapon):
-    def __init__(self, name: str, damage: Dices.Dice, saved_dmg: Dices.Dice, n_distance: Units.Distance, l_distance: Units.Distance) -> None:
+    def __init__(self, name: str, damage: Dices.Dice, saved_dmg: Dices.Dice, n_distance: Units.Distance, l_distance: Units.Distance):
         self.name = name
         self.damage = damage
         self.saved_dmg = saved_dmg

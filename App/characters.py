@@ -11,7 +11,7 @@ class Character:
                  name: str,
                  race: Races.Race,
                  chr_class: Classes.Class,
-                 level: int = 0,
+                 exp: int = 0,
                  inventory: list = [],
                  strength: Abilities.Strength = Abilities.Strength(),
                  wisdom: Abilities.Wisdom = Abilities.Wisdom(),
@@ -44,7 +44,8 @@ class Character:
         self.name = name
         self.race = race
         self.chr_class = chr_class
-        self.level = level
+        self.exp = exp
+        self.level = self.exp2level()
         self.inventory = inventory
 
         #  Calculates the abilities using the standard method
@@ -98,7 +99,7 @@ class Character:
         self.saved_data = [self.name,
                            self.race.data,
                            self.chr_class.data,
-                           self.level,
+                           self.exp,
                            self.inventory,
                            self.strength.value,
                            self.wisdom.value,
@@ -189,6 +190,16 @@ class Character:
             return self.performance
         elif skill_name == "Persuasion":
             return self.persuasion
+
+    def exp2level(self) -> int:
+        assert self.exp >= 0
+        upper_level_bounds = [300, 900, 2700, 6500,
+                              14000, 23000, 34000, 48000, 64000, 85000, 100000, 120000, 140000, 165000, 195000, 225000, 265000, 305000, 355000]
+        for bound in upper_level_bounds:
+            if self.exp < bound:
+                return upper_level_bounds.index(bound) + 1
+        if self.exp > upper_level_bounds[-1]:
+            return 20
 
 
 def load(file_path):
