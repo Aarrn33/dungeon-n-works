@@ -1,6 +1,6 @@
 import App.Utilities.dice as Dices
 import App.Utilities.units as Units
-import App.Utilities.money as Money
+import sqlite3
 
 # TODO Add weight quantity and a description for items
 # A super class for items
@@ -12,6 +12,13 @@ class Item:
         self.weight = weight
         self.cp_cost = cp_cost
         self.description = description
+
+        # Creates database framework
+        self.conn = sqlite3.connect(r'App\\Objects\\objects.db')
+        self.cursor = self.conn.cursor()
+
+        self.saved_data = [self.name, self.weight,
+                           self.cp_cost, self.description]
 
 # A class for stackable items (ie. torches)
 
