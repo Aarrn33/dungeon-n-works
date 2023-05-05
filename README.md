@@ -16,6 +16,7 @@ import App.skills as Skills
 test_char = Characters.Character("Testing Character", ["Human"], ["Fighter"])
 test_char.save()
 new_test_char = Characters.load(r'App\\Entities\\Characters\\Testing Character.txt')
+```
 
 \
 A random quote by Evariste Galois (1811-1832) : Nitens lux, horrenda procella, tenebris æternis involuta
