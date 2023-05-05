@@ -3,13 +3,11 @@ import App.classes as Classes
 import App.abilities as Abilities
 import App.skills as Skills
 import types
-from typeguard import typechecked
 
 # This class is used to create a DnD character from a template
 
 
 class Character:
-    @typechecked
     def __init__(self,
                  name: str,
                  race: list,
