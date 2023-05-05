@@ -189,3 +189,5 @@ class Entity():
 
         if self.exp > upper_level_bounds[-1]:
             return 30
+
+# TODO Add load system
