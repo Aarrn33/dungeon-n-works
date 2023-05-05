@@ -10,7 +10,7 @@ class Ability:
         self.value = value
         if self.value <= 0:
             self.value = dice.d6.roll(3)
-        self.modifier = floor((self.value*2)+10)
+        self.modifier = floor((self.value-10)/2)
 
     def modify_value(self, factor: int):
         self.value += factor

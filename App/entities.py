@@ -2,6 +2,7 @@ import App.Utilities.units as Units
 import App.abilities as Abilities
 import App.skills as Skills
 import sqlite3
+import types
 
 
 class Entity():
@@ -13,14 +14,14 @@ class Entity():
                  hp: int,
                  senses: dict[Units.Distance],
                  exp: int,
+                 strength: int,
+                 wisdom: int,
+                 charisma: int,
+                 dexterity: int,
+                 intelligence: int,
+                 constitution: int,
                  ac: int = -1,
                  speed: Units.Distance = Units.Distance(30, "ft"),
-                 strength: int = -1,
-                 wisdom: int = -1,
-                 charisma: int = -1,
-                 dexterity: int = -1,
-                 intelligence: int = -1,
-                 constitution: int = -1,
                  athletics: int = -1,
                  acrobatics: int = -1,
                  sleight_of_hand: int = -1,
@@ -70,8 +71,6 @@ class Entity():
         self.exp = exp
         self.challenge = self.exp2challenge()
 
-        self.speed = speed
-
         self.strength = Abilities.Strength(strength)  # Physical power
         self.wisdom = Abilities.Wisdom(wisdom)  # Perception and Insight
         self.charisma = Abilities.Charisma(charisma)  # Personnality strength
@@ -85,6 +84,8 @@ class Entity():
             # Calculates default armor class if none provided
             # AC = 10 + dexterity
             self.ac = 10 + self.dexterity.modifier
+
+        self.speed = speed
 
         # Calculates skills
         # Strength dependants
@@ -122,6 +123,44 @@ class Entity():
         self.languages = languages
 
         self.actions = actions
+
+    def save(self):
+        # Generates all of the data to be saved
+        self.saved_data = []
+        for elem in dir(self):
+            obj = getattr(self, elem)
+            if elem[0] != "_" and not isinstance(obj, (types.FunctionType, types.MethodType)) and elem not in ["challenge", "saved_data"]:
+                if isinstance(obj, (Skills.Skill, Abilities.Ability)):
+                    self.saved_data.append(getattr(obj, "value"))
+
+                elif elem in ["senses"]:
+                    formated_pairs = {}
+                    for key, object in obj.items():
+                        formated_pairs[key] = [object.value, object.unit]
+                    self.saved_data.append(str(formated_pairs))
+
+                elif isinstance(obj, Units.Unit):
+                    self.saved_data.append(str([obj.value, obj.unit]))
+
+                elif isinstance(obj, list):
+                    self.saved_data.append(str(obj))
+
+                else:
+                    self.saved_data.append(obj)
+
+        self.saved_data = tuple(self.saved_data)
+        print(self.saved_data)
+
+        conn = sqlite3.connect(r'App\\Entities\\entities.db')
+        cursor = conn.cursor()
+        print(f"""
+            INSERT INTO entities VALUES (?, ?), {self.saved_data}
+            """)
+        cursor.execute(
+            f"""INSERT INTO entities VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+            self.saved_data)
+        conn.commit()
+        conn.close()
 
     def exp2challenge(self) -> float:
         assert self.exp >= 0

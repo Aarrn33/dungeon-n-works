@@ -6,7 +6,11 @@ A framework for dungeon masters to help them in their adventures \
 Early developement \
 All contributions are welcome
 
-## A way to create, save and then load a character in python
+## Quick snippets of code
+
+### Characters
+
+#### Creating, saving and loading
 
 ```python
 import App.characters as Characters
@@ -17,6 +21,17 @@ import App.skills as Skills
 test_char = Characters.Character("Testing Character", ["Human"], ["Fighter"])
 test_char.save()
 new_test_char = Characters.load(r'App\\Entities\\Characters\\Testing Character.txt')
+```
+
+### Entities
+
+#### Creating, saving
+
+```python
+import App.entities as Entities
+import App.Utilities.units as Units
+test_entity = Entities.Entity("Test entity", "Medium", "Humanoid", "True Neutral", 10, {"Darkvision": Units.Distance(60, "ft")}, 100, 16, 12, 16, 7, 11, 10)
+test_entity.save()
 ```
 
 \
