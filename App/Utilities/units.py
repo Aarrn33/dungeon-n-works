@@ -38,7 +38,7 @@ class Weight(Unit):
         if unit == "kg":
             self.kilograms = value
             self.pounds = round(self.kilograms*2.21, 3)
-        elif unit == "ft":
+        elif unit == "lb":
             self.pounds = value
             self.kilograms = round(self.pounds/2.21, 3)
         super().__init__(value, unit)

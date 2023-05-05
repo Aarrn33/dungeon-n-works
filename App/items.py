@@ -13,6 +13,14 @@ class Item:
         self.cp_cost = cp_cost
         self.description = description
 
+    def save(self):
+        conn = sqlite3.connect(r'App\\Objects\\objects.db')
+        cursor = conn.cursor()
+        cursor.execute(
+            f"""INSERT INTO objects (name, weight, cp_cost, description) VALUES ("{self.name}", {self.weight.pounds}, {self.cp_cost}, "{self.description}") """)
+        conn.commit()
+        conn.close()
+
 
 def find(item_name):
     # Connects to database framework
@@ -22,6 +30,7 @@ def find(item_name):
         f"""SELECT * FROM objects WHERE name LIKE "%{item_name}%" """)
     # TODO Update the find function to return a different item class depending on the item's categories
     data = cursor.fetchall()
+    conn.close()
     assert len(data) == 1, f"""Your query return more than one items or no 
     items at all, it returned {data}"""
     name, weight, cp_cost, description = data[0]
