@@ -3,7 +3,8 @@
 ## Introduction
 
 A framework for dungeon masters to help them in their adventures \
-Early developement
+Early developement \
+All contributions are welcome
 
 ## A way to create, save and then load a character in python
 
