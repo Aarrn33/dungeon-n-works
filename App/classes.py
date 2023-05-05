@@ -3,7 +3,7 @@ import App.Utilities.dice as dice
 
 
 class Class:
-    def __init__(self, name: str, hd: dice.Dice, st: list, skills: list, nbskills: int, chosen_skills = []):
+    def __init__(self, name: str, hd: dice.Dice, st: list, skills: list, nbskills: int, chosen_skills=[]):
         self.name = name  # Name of the class
         self.hd = hd  # Hit dice
         self.st = st  # Skills which have saving throws

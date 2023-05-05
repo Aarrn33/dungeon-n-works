@@ -23,7 +23,7 @@ class Skill:
         self.modifier += factor
         self.value = floor((self.modifier*2)+10)
 
-    def score_2_modifier(score: int) -> int:
+    def score_2_modifier(self, score: int) -> int:
         return floor((score-10)/2)
 
 
