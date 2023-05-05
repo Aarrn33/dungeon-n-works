@@ -8,18 +8,17 @@ class Ability:
     def __init__(self, name: str, value: int):
         self.name = name
         self.value = value
-        self.modifier = self.score_2_modifier(self.value)
+        if self.value <= 0:
+            self.value = dice.d6.roll(3)
+        self.modifier = floor((self.value*2)+10)
 
     def modify_value(self, factor: int):
         self.value += factor
-        self.modifier = self.score_2_modifier(self.value)
+        self.modifier = floor((self.value-10)/2)
 
     def modify_modifier(self, factor: int):
         self.modifier += factor
         self.value = floor((self.modifier*2)+10)
-
-    def score_2_modifier(self, score: int) -> int:
-        return floor((score-10)/2)
 
 # Adds classes for each ability
 

@@ -2,59 +2,63 @@ import App.races as Races
 import App.classes as Classes
 import App.abilities as Abilities
 import App.skills as Skills
+import types
+from typeguard import typechecked
 
 # This class is used to create a DnD character from a template
 
 
 class Character:
+    @typechecked
     def __init__(self,
                  name: str,
-                 race: Races.Race,
-                 chr_class: Classes.Class,
+                 race: list,
+                 chr_class: list,
                  exp: int = 0,
                  inventory: list = [],
-                 strength: Abilities.Strength = Abilities.Strength(),
-                 wisdom: Abilities.Wisdom = Abilities.Wisdom(),
-                 charisma: Abilities.Charisma = Abilities.Charisma(),
-                 dexterity: Abilities.Dexterity = Abilities.Dexterity(),
-                 intelligence: Abilities.Intelligence = Abilities.Intelligence(),
-                 constitution: Abilities.Constitution = Abilities.Constitution(),
-                 athletics: Skills.Athletics = Skills.Athletics(),
-                 acrobatics: Skills.Acrobatics = Skills.Acrobatics(),
-                 sleight_of_hand: Skills.Sleight_of_Hand = Skills.Sleight_of_Hand(),
-                 stealth: Skills.Stealth = Skills.Stealth(),
-                 arcana: Skills.Arcana = Skills.Arcana(),
-                 history: Skills.History = Skills.History(),
-                 investigation: Skills.Investigation = Skills.Investigation(),
-                 nature: Skills.Nature = Skills.Nature(),
-                 religion: Skills.Religion = Skills.Religion(),
-                 animal_handling: Skills.Animal_Handling = Skills.Animal_Handling(),
-                 insight: Skills.Insight = Skills.Insight(),
-                 medicine: Skills.Medicine = Skills.Medicine(),
-                 perception: Skills.Perception = Skills.Perception(),
-                 survival: Skills.Survival = Skills.Survival(),
-                 deception: Skills.Deception = Skills.Deception(),
-                 intimidation: Skills.Intimidation = Skills.Intimidation(),
-                 performance: Skills.Performance = Skills.Performance(),
-                 persuasion: Skills.Persuasion = Skills.Persuasion(),
-                 hp: int = 0,
+                 strength: int = -1,
+                 wisdom: int = -1,
+                 charisma: int = -1,
+                 dexterity: int = -1,
+                 intelligence: int = -1,
+                 constitution: int = -1,
+                 athletics: int = -1,
+                 acrobatics: int = -1,
+                 sleight_of_hand: int = -1,
+                 stealth: int = -1,
+                 arcana: int = -1,
+                 history: int = -1,
+                 investigation: int = -1,
+                 nature: int = -1,
+                 religion: int = -1,
+                 animal_handling: int = -1,
+                 insight: int = -1,
+                 medicine: int = -1,
+                 perception: int = -1,
+                 survival: int = -1,
+                 deception: int = -1,
+                 intimidation: int = -1,
+                 performance: int = -1,
+                 persuasion: int = -1,
+                 hp: int = -1,
                  ):
 
         # Assigns main identifiers
         self.name = name
-        self.race = race
-        self.chr_class = chr_class
+        self.race = Races.find_race(race)
+        self.chr_class = Classes.find_class(chr_class)
         self.exp = exp
         self.level = self.exp2level()
         self.inventory = inventory
 
         #  Calculates the abilities using the standard method
-        self.strength = strength  # Physical power
-        self.wisdom = wisdom  # Perception and Insight
-        self.charisma = charisma  # Personnality strength
-        self.dexterity = dexterity  # Agility
-        self.intelligence = intelligence  # Reasoning and Memory
-        self.constitution = constitution  # Endurance
+        self.strength = Abilities.Strength(strength)  # Physical power
+        self.wisdom = Abilities.Wisdom(wisdom)  # Perception and Insight
+        self.charisma = Abilities.Charisma(charisma)  # Personnality strength
+        self.dexterity = Abilities.Dexterity(dexterity)  # Agility
+        self.intelligence = Abilities.Intelligence(
+            intelligence)  # Reasoning and Memory
+        self.constitution = Abilities.Constitution(constitution)  # Endurance
 
         # Calculates default armor class
         # AC = 10 + dexterity
@@ -62,141 +66,75 @@ class Character:
 
         # Calculates skills
         # Strength dependants
-        self.athletics = athletics
+        self.athletics = Skills.Athletics(athletics, self.strength)
         # Dexterity dependants
-        self.acrobatics = acrobatics
-        self.sleight_of_hand = sleight_of_hand
-        self.stealth = stealth
+        self.acrobatics = Skills.Acrobatics(acrobatics, self.dexterity)
+        self.sleight_of_hand = Skills.Sleight_of_Hand(
+            sleight_of_hand, self.dexterity)
+        self.stealth = Skills.Stealth(stealth, self.dexterity)
         # Intelligence dependants
-        self.arcana = arcana
-        self.history = history
-        self.investigation = investigation
-        self.nature = nature
-        self.religion = religion
+        self.arcana = Skills.Arcana(arcana, self.intelligence)
+        self.history = Skills.History(history, self.intelligence)
+        self.investigation = Skills.Investigation(
+            investigation, self.intelligence)
+        self.nature = Skills.Nature(nature, self.intelligence)
+        self.religion = Skills.Religion(religion, self.intelligence)
         # Wisdom dependants
-        self.animal_handling = animal_handling
-        self.insight = insight
-        self.medicine = medicine
-        self.perception = perception
-        self.survival = survival
+        self.animal_handling = Skills.Animal_Handling(
+            animal_handling, self.wisdom)
+        self.insight = Skills.Insight(insight, self.wisdom)
+        self.medicine = Skills.Medicine(medicine, self.wisdom)
+        self.perception = Skills.Perception(perception, self.wisdom)
+        self.survival = Skills.Survival(survival, self.wisdom)
         # Charisma dependants
-        self.deception = deception
-        self.intimidation = intimidation
-        self.performance = performance
-        self.persuasion = persuasion
+        self.deception = Skills.Deception(deception, self.charisma)
+        self.intimidation = Skills.Intimidation(intimidation, self.charisma)
+        self.performance = Skills.Performance(performance, self.charisma)
+        self.persuasion = Skills.Persuasion(persuasion, self.charisma)
 
-        for skill in chr_class.chosen_skills:
-            self.find_skill(skill).modify_value(1)
+        for skill in self.chr_class.chosen_skills:
+            formatted_skill = skill.lower()
+            formatted_skill = formatted_skill.replace(" ", "_")
+            getattr(self, formatted_skill).modify_value(1)
 
         self.hp = hp
-        if self.hp == 0:
+        if self.hp <= 0:
             self.hp = self.chr_class.hd.roll()
 
         # TODO Incorporate saving throws
         # TODO Add movement speed
         # TODO Add inspiration
         # TODO Add proficiency bonus
-        
-        self.update()
-        
-        self.saved_data = [self.name,
-                           self.race.data,
-                           self.chr_class.data,
-                           self.exp,
-                           self.inventory,
-                           self.strength.value,
-                           self.wisdom.value,
-                           self.charisma.value,
-                           self.dexterity.value,
-                           self.intelligence.value,
-                           self.constitution.value,
-                           self.ac,
-                           self.athletics.value,
-                           self.acrobatics.value,
-                           self.sleight_of_hand.value,
-                           self.stealth.value,
-                           self.arcana.value,
-                           self.history.value,
-                           self.investigation.value,
-                           self.nature.value,
-                           self.religion.value,
-                           self.animal_handling.value,
-                           self.insight.value,
-                           self.medicine.value,
-                           self.perception.value,
-                           self.survival.value,
-                           self.deception.value,
-                           self.intimidation.value,
-                           self.performance.value,
-                           self.persuasion.value,
-                           self.hp,
-                           ]
 
-        self.saved_data = [str(element) for element in self.saved_data]
+        self.update()
 
     def update(self):
         self.level = self.exp2level()
         self.ac = 10 + self.dexterity.modifier
 
     def save(self):
+        # Generates all of the data to be saved
+        self.saved_data = []
+        for elem in dir(self):
+            obj = getattr(self, elem)
+            if elem[0] != "_" and not isinstance(obj, (types.FunctionType, types.MethodType)) and elem not in ["saved_data", "ac", "level"]:
+                if isinstance(obj, (Skills.Skill, Abilities.Ability)):
+                    data = str(elem) + ": " + str(getattr(obj, "value"))
+                    self.saved_data.append(data)
+                elif isinstance(obj, (Classes.Class, Races.Race)):
+                    data = str(elem) + ": " + str(getattr(obj, "data"))
+                    self.saved_data.append(data)
+                else:
+                    data = str(elem) + ": " + str(obj)
+                    self.saved_data.append(data)
+
         # Adds a new line between every element for saving
         formated_saved_data = ["\n"] * (len(self.saved_data) * 2 - 1)
         formated_saved_data[0::2] = self.saved_data
         file_name = r'App\\Entities\\Characters\\' + self.name + ".txt"
+
         with open(file_name, "w") as file:
             file.writelines(formated_saved_data)
-
-    def find_ability(self, ability_name):
-        if ability_name == "Strength":
-            return self.strength
-        elif ability_name == "Wisdom":
-            return self.wisdom
-        elif ability_name == "Charisma":
-            return self.charisma
-        elif ability_name == "Dexterity":
-            return self.dexterity
-        elif ability_name == "Intelligence":
-            return self.intelligence
-        elif ability_name == "Constitution":
-            return self.constitution
-
-    def find_skill(self, skill_name):
-        if skill_name == "Athletics":
-            return self.athletics
-        elif skill_name == "Acrobatics":
-            return self.acrobatics
-        elif skill_name == "Sleight of Hand":
-            return self.sleight_of_hand
-        elif skill_name == "Stealth":
-            return self.stealth
-        elif skill_name == "Arcana":
-            return self.arcana
-        elif skill_name == "History":
-            return self.history
-        elif skill_name == "Investigation":
-            return self.investigation
-        elif skill_name == "Nature":
-            return self.nature
-        elif skill_name == "Religion":
-            return self.religion
-        elif skill_name == "Animal Handling":
-            return self.animal_handling
-        elif skill_name == "Insight":
-            return self.insight
-        elif skill_name == "Medicine":
-            return self.medicine
-        elif skill_name == "Perception":
-            return self.perception
-        elif skill_name == "Survival":
-            return self.survival
-        elif skill_name == "Deception":
-            return self.deception
-        elif skill_name == "Intimidation":
-            return self.intimidation
-        elif skill_name == "Performance":
-            return self.performance
-        elif skill_name == "Persuasion":
-            return self.persuasion
 
     def exp2level(self) -> int:
         assert self.exp >= 0
@@ -213,48 +151,19 @@ def load(file_path):
     with open(file_path, "r")as file:
         raw_data = file.read()
     raw_data = raw_data.split("\n")
+    raw_data = [elem.split(": ") for elem in raw_data]
     typed_data = []
     for element in raw_data:
-        if isinstance(element, str):
+        try:
+            element[1] = int(element[1])
+        except ValueError:
+            pass
+        if isinstance(element[1], str):
             try:
-                element = int(element)
-            except ValueError:
-                pass
-        if isinstance(element, str):
-            try:
-                element = eval(element)
+                element[1] = eval(element[1])
             except (SyntaxError, NameError):
                 pass
         typed_data.append(element)
-    character = Character(typed_data[0],
-                          Races.find_race(typed_data[1]),
-                          Classes.find_class(typed_data[2]),
-                          typed_data[3],
-                          typed_data[4],
-                          Abilities.Strength(typed_data[5]),
-                          Abilities.Wisdom(typed_data[6]),
-                          Abilities.Charisma(typed_data[7]),
-                          Abilities.Dexterity(typed_data[8]),
-                          Abilities.Intelligence(typed_data[9]),
-                          Abilities.Constitution(typed_data[10]),
-                          Skills.Athletics(typed_data[11]),
-                          Skills.Acrobatics(typed_data[12]),
-                          Skills.Sleight_of_Hand(typed_data[13]),
-                          Skills.Stealth(typed_data[14]),
-                          Skills.Arcana(typed_data[15]),
-                          Skills.History(typed_data[16]),
-                          Skills.Investigation(typed_data[17]),
-                          Skills.Nature(typed_data[18]),
-                          Skills.Religion(typed_data[19]),
-                          Skills.Animal_Handling(typed_data[20]),
-                          Skills.Insight(typed_data[21]),
-                          Skills.Medicine(typed_data[22]),
-                          Skills.Perception(typed_data[23]),
-                          Skills.Survival(typed_data[24]),
-                          Skills.Deception(typed_data[25]),
-                          Skills.Intimidation(typed_data[26]),
-                          Skills.Performance(typed_data[27]),
-                          Skills.Persuasion(typed_data[28]),
-                          typed_data[29],
-                          )
+    data_dict = {key: value for key, value in typed_data}
+    character = Character(**data_dict)
     return character

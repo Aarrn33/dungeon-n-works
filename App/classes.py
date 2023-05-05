@@ -23,8 +23,8 @@ class Class:
         if self.chosen_skills == []:  # If no chosen skills were provided, or if the previous test failed
             skills_to_choose = self.skills
             num_of_chosen_skills = 0
-
             while num_of_chosen_skills < nbskills:
+                print(self.skills)
                 skill_choice = input(
                     "Choose a skill amongst the ones shown to you before: ")
                 try:
@@ -60,4 +60,7 @@ def find_class(class_data):
     # Checks for all classes
     # TODO Check for other classes and subclasses
     if class_data[0] == "Fighter":
-        return Fighter(class_data[1])
+        if len(class_data) > 1:
+            return Fighter(class_data[1])
+        else:
+            return Fighter()

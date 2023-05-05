@@ -1,31 +1,30 @@
-Senku Ishigami
-['Human', 'standard']
-['Fighter', ['Survival', 'Perception']]
-3578
-["Alchemist's Supplies", 'Chain Mail', 'Common Clothes', '38 Crossbow Bolts', 'Heavy Crossbow', '2 Longswords', 'Iron Pot', 'Shield', 'Shovel', 'Bedroll', 'Manticore Tail Spikes', 'Mess Kit', 'Potion of Healing', 'Tinderbox', 'Waterskin']
-11
-11
-9
-15
-14
-14
-12
-11
-15
-15
-15
-14
-14
-14
-14
-14
-12
-11
-12
-12
-12
-9
-9
-9
-9
-36
+acrobatics: 15
+animal_handling: 12
+arcana: 14
+athletics: 11
+charisma: 9
+chr_class: ['Fighter', ['Perception', 'Survival']]
+constitution: 14
+deception: 9
+dexterity: 15
+exp: 3578
+history: 14
+hp: 8
+insight: 11
+intelligence: 14
+intimidation: 9
+inventory: ["Alchemist's Supplies", 'Chain Mail', 'Common Clothes', '38 Crossbow Bolts', 'Heavy Crossbow', '2 Longswords', 'Iron Pot', 'Shield', 'Shovel', 'Bedroll', 'Manticore Tail Spikes', 'Mess Kit', 'Potion of Healing', 'Tinderbox', 'Waterskin']
+investigation: 14
+medicine: 12
+name: Senku Ishigami
+nature: 14
+perception: 12
+performance: 9
+persuasion: 9
+race: ['Human', 'standard']
+religion: 14
+sleight_of_hand: 15
+stealth: 15
+strength: 11
+survival: 12
+wisdom: 11

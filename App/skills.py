@@ -9,30 +9,27 @@ class Skill:
         self.name = name
         self.dependancy = dependancy
         self.value = value
-        if self.value == -1:
+        if self.value <= 0:
             self.value = self.dependancy.value
             self.modifier = self.dependancy.modifier
         else:
-            self.modifier = self.score_2_modifier(self.value)
+            self.modifier = floor((self.value-10)/2)
 
     def modify_value(self, factor: int):
         self.value += factor
-        self.modifier = self.score_2_modifier(self.value)
+        self.modifier = floor((self.value-10)/2)
 
     def modify_modifier(self, factor: int):
         self.modifier += factor
         self.value = floor((self.modifier*2)+10)
 
-    def score_2_modifier(self, score: int) -> int:
-        return floor((score-10)/2)
-
 
 # Adds classes for each skill
 # Strength dependants
 class Athletics(Skill):
-    def __init__(self, value: int = -1):
+    def __init__(self, value: int = -1, dependancy: Abilities.Strength = Abilities.Strength()):
         self.name = "Athletics"
-        self.dependancy = Abilities.Strength()
+        self.dependancy = dependancy
         self.value = value
         super().__init__(self.name, self.dependancy, self.value)
 
@@ -40,25 +37,25 @@ class Athletics(Skill):
 
 
 class Acrobatics(Skill):
-    def __init__(self, value: int = -1):
+    def __init__(self, value: int = -1, dependancy: Abilities.Dexterity = Abilities.Dexterity()):
         self.name = "Acrobatics"
-        self.dependancy = Abilities.Dexterity()
+        self.dependancy = dependancy
         self.value = value
         super().__init__(self.name, self.dependancy, self.value)
 
 
 class Sleight_of_Hand(Skill):
-    def __init__(self, value: int = -1):
+    def __init__(self, value: int = -1, dependancy: Abilities.Dexterity = Abilities.Dexterity()):
         self.name = "Sleight of Hand"
-        self.dependancy = Abilities.Dexterity()
+        self.dependancy = dependancy
         self.value = value
         super().__init__(self.name, self.dependancy, self.value)
 
 
 class Stealth(Skill):
-    def __init__(self, value: int = -1):
+    def __init__(self, value: int = -1, dependancy: Abilities.Dexterity = Abilities.Dexterity()):
         self.name = "Stealth"
-        self.dependancy = Abilities.Dexterity()
+        self.dependancy = dependancy
         self.value = value
         super().__init__(self.name, self.dependancy, self.value)
 
@@ -66,41 +63,41 @@ class Stealth(Skill):
 
 
 class Arcana(Skill):
-    def __init__(self, value: int = -1):
+    def __init__(self, value: int = -1, dependancy: Abilities.Intelligence = Abilities.Intelligence()):
         self.name = "Arcana"
-        self.dependancy = Abilities.Intelligence()
+        self.dependancy = dependancy
         self.value = value
         super().__init__(self.name, self.dependancy, self.value)
 
 
 class History(Skill):
-    def __init__(self, value: int = -1):
+    def __init__(self, value: int = -1, dependancy: Abilities.Intelligence = Abilities.Intelligence()):
         self.name = "History"
-        self.dependancy = Abilities.Intelligence()
+        self.dependancy = dependancy
         self.value = value
         super().__init__(self.name, self.dependancy, self.value)
 
 
 class Investigation(Skill):
-    def __init__(self, value: int = -1):
+    def __init__(self, value: int = -1, dependancy: Abilities.Intelligence = Abilities.Intelligence()):
         self.name = "Investigation"
-        self.dependancy = Abilities.Intelligence()
+        self.dependancy = dependancy
         self.value = value
         super().__init__(self.name, self.dependancy, self.value)
 
 
 class Nature(Skill):
-    def __init__(self, value: int = -1):
+    def __init__(self, value: int = -1, dependancy: Abilities.Intelligence = Abilities.Intelligence()):
         self.name = "Nature"
-        self.dependancy = Abilities.Intelligence()
+        self.dependancy = dependancy
         self.value = value
         super().__init__(self.name, self.dependancy, self.value)
 
 
 class Religion(Skill):
-    def __init__(self, value: int = -1):
+    def __init__(self, value: int = -1, dependancy: Abilities.Intelligence = Abilities.Intelligence()):
         self.name = "Religion"
-        self.dependancy = Abilities.Intelligence()
+        self.dependancy = dependancy
         self.value = value
         super().__init__(self.name, self.dependancy, self.value)
 
@@ -108,41 +105,41 @@ class Religion(Skill):
 
 
 class Animal_Handling(Skill):
-    def __init__(self, value: int = -1):
+    def __init__(self, value: int = -1, dependancy: Abilities.Wisdom = Abilities.Wisdom()):
         self.name = "Animal Handling"
-        self.dependancy = Abilities.Wisdom()
+        self.dependancy = dependancy
         self.value = value
         super().__init__(self.name, self.dependancy, self.value)
 
 
 class Insight(Skill):
-    def __init__(self, value: int = -1):
+    def __init__(self, value: int = -1, dependancy: Abilities.Wisdom = Abilities.Wisdom()):
         self.name = "Insight"
-        self.dependancy = Abilities.Wisdom()
+        self.dependancy = dependancy
         self.value = value
         super().__init__(self.name, self.dependancy, self.value)
 
 
 class Medicine(Skill):
-    def __init__(self, value: int = -1):
+    def __init__(self, value: int = -1, dependancy: Abilities.Wisdom = Abilities.Wisdom()):
         self.name = "Medicine"
-        self.dependancy = Abilities.Wisdom()
+        self.dependancy = dependancy
         self.value = value
         super().__init__(self.name, self.dependancy, self.value)
 
 
 class Perception(Skill):
-    def __init__(self, value: int = -1):
+    def __init__(self, value: int = -1, dependancy: Abilities.Wisdom = Abilities.Wisdom()):
         self.name = "Perception"
-        self.dependancy = Abilities.Wisdom()
+        self.dependancy = dependancy
         self.value = value
         super().__init__(self.name, self.dependancy, self.value)
 
 
 class Survival(Skill):
-    def __init__(self, value: int = -1):
+    def __init__(self, value: int = -1, dependancy: Abilities.Wisdom = Abilities.Wisdom()):
         self.name = "Survival"
-        self.dependancy = Abilities.Wisdom()
+        self.dependancy = dependancy
         self.value = value
         super().__init__(self.name, self.dependancy, self.value)
 
@@ -150,32 +147,32 @@ class Survival(Skill):
 
 
 class Deception(Skill):
-    def __init__(self, value: int = -1):
+    def __init__(self, value: int = -1, dependancy: Abilities.Charisma = Abilities.Charisma()):
         self.name = "Deception"
-        self.dependancy = Abilities.Charisma()
+        self.dependancy = dependancy
         self.value = value
         super().__init__(self.name, self.dependancy, self.value)
 
 
 class Intimidation(Skill):
-    def __init__(self, value: int = -1):
+    def __init__(self, value: int = -1, dependancy: Abilities.Charisma = Abilities.Charisma()):
         self.name = "Intimidation"
-        self.dependancy = Abilities.Charisma()
+        self.dependancy = dependancy
         self.value = value
         super().__init__(self.name, self.dependancy, self.value)
 
 
 class Performance(Skill):
-    def __init__(self, value: int = -1):
+    def __init__(self, value: int = -1, dependancy: Abilities.Charisma = Abilities.Charisma()):
         self.name = "Performance"
-        self.dependancy = Abilities.Charisma()
+        self.dependancy = dependancy
         self.value = value
         super().__init__(self.name, self.dependancy, self.value)
 
 
 class Persuasion(Skill):
-    def __init__(self, value: int = -1):
+    def __init__(self, value: int = -1, dependancy: Abilities.Charisma = Abilities.Charisma()):
         self.name = "Persuasion"
-        self.dependancy = Abilities.Charisma()
+        self.dependancy = dependancy
         self.value = value
         super().__init__(self.name, self.dependancy, self.value)
