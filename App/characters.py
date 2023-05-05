@@ -2,6 +2,7 @@ import App.races as Races
 import App.classes as Classes
 import App.abilities as Abilities
 import App.skills as Skills
+import App.Utilities.units as Units
 import types
 
 # This class is used to create a DnD character from a template
@@ -14,6 +15,7 @@ class Character:
                  chr_class: list,
                  exp: int = 0,
                  inventory: list = [],
+                 speed: Units.Distance = Units.Distance(30, "ft"),
                  strength: int = -1,
                  wisdom: int = -1,
                  charisma: int = -1,
@@ -100,7 +102,6 @@ class Character:
             self.hp = self.chr_class.hd.roll()
 
         # TODO Incorporate saving throws
-        # TODO Add movement speed
         # TODO Add inspiration
         # TODO Add proficiency bonus
 
