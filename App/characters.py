@@ -138,7 +138,11 @@ class Character:
     def exp2level(self) -> int:
         assert self.exp >= 0
         upper_level_bounds = [300, 900, 2700, 6500,
-                              14000, 23000, 34000, 48000, 64000, 85000, 100000, 120000, 140000, 165000, 195000, 225000, 265000, 305000, 355000]
+                              14000, 23000, 34000,
+                              48000, 64000, 85000, 100000,
+                              120000, 140000, 165000,
+                              195000, 225000, 265000,
+                              305000, 355000]
         for bound in upper_level_bounds:
             if self.exp < bound:
                 return upper_level_bounds.index(bound) + 1
