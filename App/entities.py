@@ -70,6 +70,8 @@ class Entity():
         self.exp = exp
         self.challenge = self.exp2challenge()
 
+        self.speed = speed
+
         self.strength = Abilities.Strength(strength)  # Physical power
         self.wisdom = Abilities.Wisdom(wisdom)  # Perception and Insight
         self.charisma = Abilities.Charisma(charisma)  # Personnality strength
@@ -112,6 +114,15 @@ class Entity():
         self.performance = Skills.Performance(performance, self.charisma)
         self.persuasion = Skills.Persuasion(persuasion, self.charisma)
 
+        # TODO Make the three following attributes work
+        self.vulnerabilities = vulnerabilities
+        self.resistances = resistances
+        self.immunities = immunities
+
+        self.languages = languages
+
+        self.actions = actions
+
     def exp2challenge(self) -> float:
         assert self.exp >= 0
         upper_level_bounds = [10, 25, 50, 100, 200,
@@ -126,6 +137,16 @@ class Entity():
                               135000, 155000]
         for bound in upper_level_bounds:
             if self.exp < bound:
-                return upper_level_bounds.index(bound) + 1
+                if upper_level_bounds.index(bound) >= 4:
+                    return upper_level_bounds.index(bound) - 3
+                elif upper_level_bounds.index(bound) == 0:
+                    return 0
+                elif upper_level_bounds.index(bound) == 1:
+                    return 0.125
+                elif upper_level_bounds.index(bound) == 2:
+                    return 0.25
+                elif upper_level_bounds.index(bound) == 3:
+                    return 0.5
+
         if self.exp > upper_level_bounds[-1]:
             return 30
