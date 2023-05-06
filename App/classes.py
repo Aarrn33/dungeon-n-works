@@ -1,9 +1,9 @@
-import App.Utilities.dice as dice
+import App.Utilities.dices as dices
 # A class that is used to create character classes
 
 
 class Class:
-    def __init__(self, name: str, hd: dice.Dice, st: list, skills: list, nbskills: int, chosen_skills=[]):
+    def __init__(self, name: str, hd: dices.Dice, st: list, skills: list, nbskills: int, chosen_skills=[]):
         self.name = name  # Name of the class
         self.hd = hd  # Hit dice
         self.st = st  # Skills which have saving throws
@@ -41,7 +41,7 @@ class Class:
 class Fighter(Class):
     def __init__(self, chosen_skills: list = []):
         self.name = "Fighter"
-        self.hd = dice.d10
+        self.hd = dices.d10
         self.st = ["Strength", "Constitution"]
         self.skills = ["Acrobatics", "Animal Handling", "Athletics",
                        "History", "Insight", "Intimidation", "Perception", "Survival"]

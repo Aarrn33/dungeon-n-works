@@ -1,4 +1,5 @@
 import App.Utilities.units as Units
+import App.Utilities.dices as Dices
 import App.abilities as Abilities
 import App.skills as Skills
 import sqlite3
@@ -10,8 +11,8 @@ class Entity():
                  name: str,
                  size: str,
                  type: str,
-                 aligmnement: str,
-                 hp: int,
+                 alignment: str,
+                 hp_str: str,
                  senses: dict[Units.Distance],
                  exp: int,
                  strength: int,
@@ -44,7 +45,7 @@ class Entity():
                  resistances: list = [],
                  immunities: list = [],
                  languages: list[str] = [],
-                 actions: list = [],
+                 actions: dict[str] = {},
                  ):
         self.name = name
 
@@ -59,13 +60,24 @@ class Entity():
         assert type in auth_types, f"The only authorized siztypeses are {auth_types.join(', ')}"
         self.type = type
 
-        aligmnment_list = ["Lawful Good", "Lawful Neutral", "Lawful Evil",
-                           "Neutral Good", "True Neutral", "Neutral Evil",
-                           "Chaotic Good", "Chaotic Neutral", "Chaotic Evil"]
-        assert aligmnement in aligmnment_list, f"The only authorized alignments are {aligmnment_list.join(', ')}"
-        self.aligmnement = aligmnement
+        alignment_list = ["Lawful Good", "Lawful Neutral", "Lawful Evil",
+                          "Neutral Good", "True Neutral", "Neutral Evil",
+                          "Chaotic Good", "Chaotic Neutral", "Chaotic Evil"]
+        assert alignment in alignment_list, f"The only authorized alignments are {alignment_list.join(', ')}"
+        self.alignment = alignment
 
-        self.hp = hp
+        self.hp_str = hp_str
+        # Formats the dice data to extract the number of faces
+        nb_dices, dice_nb_faces = hp_str.split("d")
+        nb_dices = int(nb_dices)
+        dice_nb_faces = dice_nb_faces.split("+")[0]
+        dice_nb_faces = int(dice_nb_faces.split("-")[0])
+        modifier = int(hp_str.split("+")[1])
+        # If the x d y-z syntax is used instead of the x d y+z
+        if not modifier:
+            modifier = -int(hp_str.split("-")[1])
+        self.hp = Dices.Dice(dice_nb_faces).roll(nb_dices, modifier)
+
         self.senses = senses
 
         self.exp = exp
@@ -129,7 +141,7 @@ class Entity():
         self.saved_data = []
         for elem in dir(self):
             obj = getattr(self, elem)
-            if elem[0] != "_" and not isinstance(obj, (types.FunctionType, types.MethodType)) and elem not in ["challenge", "saved_data"]:
+            if elem[0] != "_" and not isinstance(obj, (types.FunctionType, types.MethodType)) and elem not in ["challenge", "saved_data", "hp"]:
                 if isinstance(obj, (Skills.Skill, Abilities.Ability)):
                     self.saved_data.append(getattr(obj, "value"))
 
@@ -149,13 +161,9 @@ class Entity():
                     self.saved_data.append(obj)
 
         self.saved_data = tuple(self.saved_data)
-        print(self.saved_data)
 
         conn = sqlite3.connect(r'App\\Entities\\entities.db')
         cursor = conn.cursor()
-        print(f"""
-            INSERT INTO entities VALUES (?, ?), {self.saved_data}
-            """)
         cursor.execute(
             f"""INSERT INTO entities VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
             self.saved_data)
@@ -190,4 +198,22 @@ class Entity():
         if self.exp > upper_level_bounds[-1]:
             return 30
 
-# TODO Add load system
+
+def load(entity_name):
+    conn = sqlite3.connect(r'App\\Entities\\entities.db')
+    cursor = conn.cursor()
+    cursor.execute(
+        f"""SELECT * FROM entities WHERE name LIKE "%{entity_name}%" """)
+    data = cursor.fetchall()
+    cursor.execute("PRAGMA table_info(entities)")
+    raw_columns = cursor.fetchall()
+    conn.close()
+    columns = []
+    for column_data in raw_columns:
+        columns.append(column_data[1])
+    assert len(data) == 1, f"""Your query return more than one items or no 
+    items at all, it returned {data}"""
+    data_dict = {}
+    for index, value in enumerate(data[0]):
+        data_dict[columns[index]] = value
+    return Entity(**data_dict)

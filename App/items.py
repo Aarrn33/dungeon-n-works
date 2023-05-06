@@ -1,4 +1,4 @@
-import App.Utilities.dice as Dices
+import App.Utilities.dices as Dices
 import App.Utilities.units as Units
 import sqlite3
 

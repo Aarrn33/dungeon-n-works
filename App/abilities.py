@@ -1,4 +1,4 @@
-import App.Utilities.dice as dice
+import App.Utilities.dices as dices
 from math import floor
 
 # A class that is used to define the abilities of a character
@@ -9,7 +9,7 @@ class Ability:
         self.name = name
         self.value = value
         if self.value <= 0:
-            self.value = dice.d6.roll(3)
+            self.value = dices.d6.roll(3)
         self.modifier = floor((self.value-10)/2)
 
     def modify_value(self, factor: int):
@@ -24,42 +24,42 @@ class Ability:
 
 
 class Strength(Ability):
-    def __init__(self, value: int = dice.d6.roll(3)):
+    def __init__(self, value: int = dices.d6.roll(3)):
         self.name = "Strength"
         self.value = value
         super().__init__(self.name, self.value)
 
 
 class Wisdom(Ability):
-    def __init__(self, value: int = dice.d6.roll(3)):
+    def __init__(self, value: int = dices.d6.roll(3)):
         self.name = "Wisdom"
         self.value = value
         super().__init__(self.name, self.value)
 
 
 class Charisma(Ability):
-    def __init__(self, value: int = dice.d6.roll(3)):
+    def __init__(self, value: int = dices.d6.roll(3)):
         self.name = "Charisma"
         self.value = value
         super().__init__(self.name, self.value)
 
 
 class Dexterity(Ability):
-    def __init__(self, value: int = dice.d6.roll(3)):
+    def __init__(self, value: int = dices.d6.roll(3)):
         self.name = "Dexterity"
         self.value = value
         super().__init__(self.name, self.value)
 
 
 class Intelligence(Ability):
-    def __init__(self, value: int = dice.d6.roll(3)):
+    def __init__(self, value: int = dices.d6.roll(3)):
         self.name = "Intelligence"
         self.value = value
         super().__init__(self.name, self.value)
 
 
 class Constitution(Ability):
-    def __init__(self, value: int = dice.d6.roll(3)):
+    def __init__(self, value: int = dices.d6.roll(3)):
         self.name = "Constitution"
         self.value = value
         super().__init__(self.name, self.value)

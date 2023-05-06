@@ -168,5 +168,4 @@ def load(file_path):
                 pass
         typed_data.append(element)
     data_dict = {key: value for key, value in typed_data}
-    character = Character(**data_dict)
-    return character
+    return Character(**data_dict)
