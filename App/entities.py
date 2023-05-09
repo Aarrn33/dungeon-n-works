@@ -183,7 +183,7 @@ class Entity():
                               90000, 105000, 120000,
                               135000, 155000]
         for bound in upper_level_bounds:
-            if self.exp < bound:
+            if self.exp <= bound:
                 if upper_level_bounds.index(bound) >= 4:
                     return upper_level_bounds.index(bound) - 3
                 elif upper_level_bounds.index(bound) == 0:
