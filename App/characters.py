@@ -146,7 +146,7 @@ class Character:
         for bound in upper_level_bounds:
             if self.exp < bound:
                 return upper_level_bounds.index(bound) + 1
-        if self.exp > upper_level_bounds[-1]:
+        if self.exp >= upper_level_bounds[-1]:
             return 20
 
 
