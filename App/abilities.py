@@ -21,6 +21,7 @@ class Ability:
         self.value = floor((self.modifier*2)+10)
 
 # Adds classes for each ability
+# This is z useless commentary
 
 
 class Strength(Ability):
