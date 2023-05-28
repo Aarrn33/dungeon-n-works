@@ -1,5 +1,6 @@
 import App.Utilities.dices as Dices
 import App.Utilities.units as Units
+import App.Utilities.money as Money
 import sqlite3
 
 # TODO Updates the db to include item categories (stackable, equipment, weapon...)
@@ -7,7 +8,7 @@ import sqlite3
 
 
 class Item:
-    def __init__(self, name: str, weight: Units.Weight, cp_cost: int, description: str = ""):
+    def __init__(self, name: str, weight: Units.Weight, cp_cost: Money.Coinage, description: str = ""):
         self.name = name
         self.weight = weight
         self.cp_cost = cp_cost

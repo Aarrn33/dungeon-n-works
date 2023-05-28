@@ -50,6 +50,7 @@ class Character:
         self.exp = exp
         self.level = self.exp2level()
         self.inventory = inventory
+        self.speed = speed
 
         #  Calculates the abilities using the standard method
         self.strength = Abilities.Strength(strength)  # Physical power

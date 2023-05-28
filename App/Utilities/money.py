@@ -1,15 +1,14 @@
 import math
-import App.items as Items
 import App.Utilities.units as Units
 
 
-class Coinage(Items.Stackable):
+class Coinage():
     def __init__(self, name: str, cp_value: int):
         self.name = name
-        assert self.name in ["Copper piece", "Silver piece", "Electrum piece", "Gold piece",
-                             "Platinum piece"], "The chosen coinage is not valid in DnD"
-        super().__init__(self.name, Units.Weight(0.02, "lb"), cp_value
-                         )
+        self.cp_value = cp_value
+        auth_coins = ["Copper piece", "Silver piece",
+                      "Electrum piece", "Gold piece", "Platinum piece"]
+        assert self.name in auth_coins, f"The chosen coinage is not valid in DnD, the valid values are {auth_coins}"
 
     def convert(self, end_coinage):
         assert isinstance(
