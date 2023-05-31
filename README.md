@@ -30,7 +30,6 @@ new_test_char = Characters.load(r'App\\Entities\\Characters\\Testing Character.t
 ```python
 import App.entities as Entities
 import App.Utilities.units as Units
-import sqlite3
 test_entity = Entities.Entity("Test entity", "Medium", "Humanoid", "True Neutral", 10, {"Darkvision": Units.Distance(60, "ft")}, 100, 16, 12, 16, 7, 11, 10)
 test_entity.save()
 new_test_entity = Entities.load("Test entity")

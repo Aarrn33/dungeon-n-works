@@ -133,3 +133,5 @@ def find_race(race_data):
         return Human()
     elif race_data[0] == "Tiefling":
         return Tiefling()
+    else:
+        assert f"This should never run unless your input: {race_data} is not a valid race for a DnD character"

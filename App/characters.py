@@ -4,6 +4,7 @@ import App.abilities as Abilities
 import App.skills as Skills
 import App.Utilities.units as Units
 import types
+import sqlite3
 
 # This class is used to create a DnD character from a template
 
@@ -45,11 +46,21 @@ class Character:
 
         # Assigns main identifiers
         self.name = name
+
+        if isinstance(race, str):
+            race = eval(race)
         self.race = Races.find_race(race)
+
+        if isinstance(chr_class, str):
+            chr_class = eval(chr_class)
         self.chr_class = Classes.find_class(chr_class)
+
         self.exp = exp
         self.level = self.exp2level()
         self.inventory = inventory
+
+        if not isinstance(speed, Units.Unit):
+            speed = Units.Distance(speed, "ft")
         self.speed = speed
 
         #  Calculates the abilities using the standard method
@@ -119,22 +130,26 @@ class Character:
             obj = getattr(self, elem)
             if elem[0] != "_" and not isinstance(obj, (types.FunctionType, types.MethodType)) and elem not in ["saved_data", "ac", "level"]:
                 if isinstance(obj, (Skills.Skill, Abilities.Ability)):
-                    data = str(elem) + ": " + str(getattr(obj, "value"))
-                    self.saved_data.append(data)
+                    self.saved_data.append(str(getattr(obj, "value")))
+
                 elif isinstance(obj, (Classes.Class, Races.Race)):
-                    data = str(elem) + ": " + str(getattr(obj, "data"))
-                    self.saved_data.append(data)
+                    self.saved_data.append(str(getattr(obj, "data")))
+
+                elif isinstance(obj, Units.Unit):
+                    self.saved_data.append(str(obj.value))
+
                 else:
-                    data = str(elem) + ": " + str(obj)
-                    self.saved_data.append(data)
+                    self.saved_data.append(str(obj))
 
-        # Adds a new line between every element for saving
-        formated_saved_data = ["\n"] * (len(self.saved_data) * 2 - 1)
-        formated_saved_data[0::2] = self.saved_data
-        file_name = r'App\\Entities\\Characters\\' + self.name + ".txt"
+        self.saved_data = tuple(self.saved_data)
 
-        with open(file_name, "w") as file:
-            file.writelines(formated_saved_data)
+        conn = sqlite3.connect(r'App\\Entities\\characters.db')
+        cursor = conn.cursor()
+        cursor.execute(
+            f"""INSERT INTO characters VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+            self.saved_data)
+        conn.commit()
+        conn.close()
 
     def exp2level(self) -> int:
         assert self.exp >= 0
@@ -151,22 +166,21 @@ class Character:
             return 20
 
 
-def load(file_path):
-    with open(file_path, "r")as file:
-        raw_data = file.read()
-    raw_data = raw_data.split("\n")
-    raw_data = [elem.split(": ") for elem in raw_data]
-    typed_data = []
-    for element in raw_data:
-        try:
-            element[1] = int(element[1])
-        except ValueError:
-            pass
-        if isinstance(element[1], str):
-            try:
-                element[1] = eval(element[1])
-            except (SyntaxError, NameError):
-                pass
-        typed_data.append(element)
-    data_dict = {key: value for key, value in typed_data}
+def load(chr_name):
+    conn = sqlite3.connect(r'App\\Entities\\characters.db')
+    cursor = conn.cursor()
+    cursor.execute(
+        f"""SELECT * FROM characters WHERE name LIKE "%{chr_name}%" """)
+    data = cursor.fetchall()
+    cursor.execute("PRAGMA table_info(characters)")
+    raw_columns = cursor.fetchall()
+    conn.close()
+    columns = []
+    for column_data in raw_columns:
+        columns.append(column_data[1])
+    assert len(data) == 1, f"""Your query return more than one items or no 
+    items at all, it returned {data}"""
+    data_dict = {}
+    for index, value in enumerate(data[0]):
+        data_dict[columns[index]] = value
     return Character(**data_dict)
