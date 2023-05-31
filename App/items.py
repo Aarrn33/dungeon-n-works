@@ -8,10 +8,19 @@ import sqlite3
 
 
 class Item:
-    def __init__(self, name: str, weight: Units.Weight, cp_cost: Money.Coinage, description: str = "", categories: list = [], requirements: dict = {}, effects: dict = {}, rarity: str = "Common", tags: list = []):
+    def __init__(self,
+                 name: str,
+                 weight: Units.Weight,
+                 cost: Money.Coinage,
+                 description: str = "",
+                 categories: list = [],
+                 requirements: dict = {},
+                 effects: dict = {},
+                 rarity: str = "Common",
+                 tags: list = []):
         self.name = name
         self.weight = weight
-        self.cp_cost = cp_cost
+        self.cp_cost = cost.convert(Money.cp)
         self.description = description
         self.categories = categories
         self.requirements = requirements
@@ -20,10 +29,30 @@ class Item:
         self.tags = tags
 
     def save(self):
+        categories = str(self.categories)[1:-1]
+        categories = categories.replace("'", "")
+        requirements = str(self.requirements)[1:-1].replace("'", "")
+        requirements = requirements.replace("'", "")
+        effects = str(self.effects)[1:-1].replace("'", "")
+        effects = effects.replace("'", "")
+        tags = str(self.tags)[1:-1].replace("'", "")
+        tags = tags.replace("'", "")
+        print(categories, requirements, effects, tags)
+
         conn = sqlite3.connect(r'App\\Objects\\objects.db')
         cursor = conn.cursor()
         cursor.execute(
-            f"""INSERT INTO objects (name, weight, cp_cost, description, categories, requirements, effects, rarity, tags) VALUES ("{self.name}", {self.weight.pounds}, {self.cp_cost}, "{self.description}", "{str(self.categories)[1:-1]}", "{str(self.requirements)[1:-1]}", "{str(self.effects)[1:-1]}", "{self.rarity}", "{str(self.tags)[1:-1]}") """)
+            f"""INSERT INTO objects (name, weight, cp_cost, description, categories, requirements, effects, rarity, tags) VALUES (
+            "{self.name}", 
+            {self.weight.pounds}, 
+            {self.cp_cost}, 
+            "{self.description}", 
+            "{categories}", 
+            "{requirements}", 
+            "{effects}", 
+            "{self.rarity}", 
+            "{tags}"
+            ) """)
         conn.commit()
         conn.close()
 

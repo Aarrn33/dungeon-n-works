@@ -15,7 +15,7 @@ class Coinage():
             end_coinage, Coinage), "The end_coinage provided is not valid"
         if isinstance(end_coinage, CP):
             # Adds shortcut if it is a conversion to cp
-            return self.cp_value
+            return CP(self.cp_value)
         else:
             return find_coin([end_coinage.name, math.floor(self.cp_value/end_coinage.cp_value)])
 
