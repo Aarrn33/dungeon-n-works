@@ -8,17 +8,22 @@ import sqlite3
 
 
 class Item:
-    def __init__(self, name: str, weight: Units.Weight, cp_cost: Money.Coinage, description: str = ""):
+    def __init__(self, name: str, weight: Units.Weight, cp_cost: Money.Coinage, description: str = "", categories: list = [], requirements: dict = {}, effects: dict = {}, rarity: str = "Common", tags: list = []):
         self.name = name
         self.weight = weight
         self.cp_cost = cp_cost
         self.description = description
+        self.categories = categories
+        self.requirements = requirements
+        self.effects = effects
+        self.rarity = rarity
+        self.tags = tags
 
     def save(self):
         conn = sqlite3.connect(r'App\\Objects\\objects.db')
         cursor = conn.cursor()
         cursor.execute(
-            f"""INSERT INTO objects (name, weight, cp_cost, description) VALUES ("{self.name}", {self.weight.pounds}, {self.cp_cost}, "{self.description}") """)
+            f"""INSERT INTO objects (name, weight, cp_cost, description, categories, requirements, effects, rarity, tags) VALUES ("{self.name}", {self.weight.pounds}, {self.cp_cost}, "{self.description}", "{str(self.categories)[1:-1]}", "{str(self.requirements)[1:-1]}", "{str(self.effects)[1:-1]}", "{self.rarity}", "{str(self.tags)[1:-1]}") """)
         conn.commit()
         conn.close()
 
@@ -34,8 +39,27 @@ def find(item_name):
     conn.close()
     assert len(data) == 1, f"""Your query return more than one items or no 
     items at all, it returned {data}"""
-    name, weight, cp_cost, description = data[0]
-    return Item(name, Units.Weight(weight, "lb"), cp_cost, description)
+    name, weight, cp_cost, description, categories, reqs, effs, rarity, tags = data[
+        0]
+    weight = Units.Weight(weight, "lb")
+    cp_cost = Money.CP(cp_cost)
+    categories = categories.split(", ") if categories else []
+
+    requirements = {}
+    if reqs:
+        reqs = reqs.split(", ")
+        for key, value in reqs:
+            requirements[key] = value
+
+    effects = {}
+    if effs:
+        effs = effs.split(", ")
+        for key, value in effs:
+            effects[key] = value
+
+    tags = tags.split(", ") if tags else []
+
+    return Item(name, weight, cp_cost, description, categories, requirements, effects, rarity, tags)
 
 # A class for stackable items (ie. torches)
 
