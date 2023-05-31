@@ -29,6 +29,7 @@ class Item:
         self.tags = tags
 
     def save(self):
+        # Exemple output : emblem = Items.Item("emblem", Units.Weight(0, "lb"), Money.GP(5), "A holy symbol is a representation of a god or pantheon. A cleric or paladin can use a holy symbol as a spellcasting focus, as described in the Spellcasting section. To use the symbol in this way, the caster must hold it in hand, wear it visibly, or bear it on a shield.", ["Gear", "Holy symbol"], rarity="Common", tags=["Utility"])
         categories = str(self.categories)[1:-1]
         categories = categories.replace("'", "")
         requirements = str(self.requirements)[1:-1].replace("'", "")
@@ -45,7 +46,7 @@ class Item:
             f"""INSERT INTO objects (name, weight, cp_cost, description, categories, requirements, effects, rarity, tags) VALUES (
             "{self.name}", 
             {self.weight.pounds}, 
-            {self.cp_cost}, 
+            {self.cp_cost.number}, 
             "{self.description}", 
             "{categories}", 
             "{requirements}", 
