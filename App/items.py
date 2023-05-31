@@ -38,7 +38,7 @@ def find(item_name):
     data = cursor.fetchall()
     conn.close()
     assert len(data) == 1, f"""Your query return more than one items or no 
-    items at all, it returned {data}"""
+    items at all, it returned {[item[0] for item in data]}"""
     name, weight, cp_cost, description, categories, reqs, effs, rarity, tags = data[
         0]
     weight = Units.Weight(weight, "lb")
