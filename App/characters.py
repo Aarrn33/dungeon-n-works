@@ -12,8 +12,8 @@ import sqlite3
 class Character:
     def __init__(self,
                  name: str,
-                 race: list,
-                 chr_class: list,
+                 race: (Races.Race | list),
+                 chr_class: (Classes.Class | list),
                  exp: int = 0,
                  inventory: list = [],
                  speed: Units.Distance = Units.Distance(30, "ft"),

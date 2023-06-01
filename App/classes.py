@@ -50,6 +50,19 @@ class Fighter(Class):
         super().__init__(self.name, self.hd, self.st,
                          self.skills, self.nbskills, self.chosen_skills)
 
+
+class Wizard(Class):
+    def __init__(self, chosen_skills: list = []):
+        self.name = "Wizard"
+        self.hd = dices.d6
+        self.st = ["Intelligence", "Wisdom"]
+        self.skills = ["Arcana", "History", "Insight",
+                       "Investigation", "Medicine", "Religion"]
+        self.nbskills = 2
+        self.chosen_skills = chosen_skills
+        super().__init__(self.name, self.hd, self.st,
+                         self.skills, self.nbskills, self.chosen_skills)
+
 # TODO Add Python classes for other DnD classes -> append find_class function
 
 
@@ -64,3 +77,10 @@ def find_class(class_data):
             return Fighter(class_data[1])
         else:
             return Fighter()
+    elif class_data[0] == "Wizard":
+        if len(class_data) > 1:
+            return Wizard(class_data[1])
+        else:
+            return Wizard()
+    else:
+        assert f"One should never reach this point unless the provided class is not valid. You provided this input: {class_data}"
