@@ -3,6 +3,7 @@ import App.classes as Classes
 import App.abilities as Abilities
 import App.skills as Skills
 import App.Utilities.units as Units
+import App.items as Items
 import types
 import sqlite3
 
@@ -65,7 +66,10 @@ class Character:
 
         self.exp = exp
         self.level = self.exp2level()
-        self.inventory = inventory
+
+        self.inventory = []
+        for item in inventory:
+            self.inventory.append(Items.find(item))
 
         if not isinstance(speed, Units.Unit):
             speed = Units.Distance(speed, "ft")
@@ -145,6 +149,9 @@ class Character:
 
                 elif isinstance(obj, Units.Unit):
                     self.saved_data.append(str(obj.value))
+
+                elif elem == "inventory":
+                    self.saved_data.append(str([item.name for item in obj]))
 
                 else:
                     self.saved_data.append(str(obj))

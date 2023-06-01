@@ -78,13 +78,17 @@ def find(item_name):
     requirements = {}
     if reqs:
         reqs = reqs.split(", ")
-        for key, value in reqs:
+        for data in reqs:
+            data = data.split(": ")
+            key, value = data
             requirements[key] = value
 
     effects = {}
     if effs:
         effs = effs.split(", ")
-        for key, value in effs:
+        for data in effs:
+            data = data.split(": ")
+            key, value = data
             effects[key] = value
 
     tags = tags.split(", ") if tags else []
