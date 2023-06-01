@@ -49,11 +49,19 @@ class Character:
 
         if isinstance(race, str):
             race = eval(race)
-        self.race = Races.find_race(race)
+            self.race = Races.find_race(race)
+        elif isinstance(race, Races.Race):
+            self.race = race
+        else:
+            assert f"One shall never come here, pb in race init, input: {race}"
 
         if isinstance(chr_class, str):
             chr_class = eval(chr_class)
-        self.chr_class = Classes.find_class(chr_class)
+            self.chr_class = Classes.find_class(chr_class)
+        elif isinstance(chr_class, Classes.Class):
+            self.chr_class = chr_class
+        else:
+            assert f"One shall never come here, pb in class init, input: {chr_class}"
 
         self.exp = exp
         self.level = self.exp2level()
