@@ -57,12 +57,11 @@ class Dragonborn(Race):
             raise RuntimeError(
                 "The color entered is not valid for a dragonborn")
 
-        # TODO: Register the breath as an item (requires level correlation)
+        # TODO: Register the breath as an action (requires level correlation)
         # TODO: Add damage resistance
-        # TODO: Add language
 
 
-# TODO create a classes for the races below -> append find_race function
+# TODO Update classes for the races below -> append find_race function
 class Dwarf(Race):
     def __init__(self):
         self.name = "Dwarf"

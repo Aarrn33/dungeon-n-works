@@ -3,10 +3,8 @@ import App.Utilities.units as Units
 import App.Utilities.money as Money
 import sqlite3
 
-# TODO Updates the db to include item categories (stackable, equipment, weapon...)
+
 # A super class for items
-
-
 class Item:
     def __init__(self,
                  name: str,
@@ -66,7 +64,6 @@ def find(item_name):
     cursor = conn.cursor()
     cursor.execute(
         f"""SELECT * FROM objects WHERE name LIKE "%{item_name}%" """)
-    # TODO Update the find function to return a different item class depending on the item's categories
     data = cursor.fetchall()
     conn.close()
     assert len(data) == 1, f"""Your query return more than one items or no 
@@ -95,7 +92,6 @@ def find(item_name):
 
     tags = tags.split(", ") if tags else []
 
-    # TODO Add more cases
     if "Weapon" in categories:
         atk_type = effects["Attack type"]
         damage = effects["Damage"]
@@ -185,4 +181,4 @@ class Range(Weapon):
 # TODO Add class for measurable items (ie. ropes)
 # TODO Add class for ammunition (ie. arrows)
 # TODO Add class for special kinds of items (ie. spells)
-# TODO Update super load call for objects subclasses
+# TODO Update find method return class (as specific as possible)

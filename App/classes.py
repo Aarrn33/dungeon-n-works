@@ -71,7 +71,6 @@ def find_class(class_data):
     if isinstance(class_data, str):
         class_data = [class_data]
     # Checks for all classes
-    # TODO Check for other classes and subclasses
     if class_data[0] == "Fighter":
         if len(class_data) > 1:
             return Fighter(class_data[1])
