@@ -95,17 +95,19 @@ def find(item_name):
 
     # TODO Add more cases
     if "Weapon" in categories:
-        damage = effects["Damage"]
         atk_type = effects["Attack type"]
+        damage = effects["Damage"]
+        dmg_type = effects["Damage type"]
         if atk_type == "Melee":
-            return Melee(name, damage, weight, cp_cost, description, categories, requirements, effects, rarity, tags)
+            range = Units.Distance(effects["Range"], "ft")
+            return Melee(name, damage, dmg_type, range, weight, cp_cost, description, categories, requirements, effects, rarity, tags)
         elif atk_type == "Ranged":
             n_distance, l_distance = effects["Range"].split("/")
             n_distance = Units.Distance(n_distance, "ft")
             l_distance = Units.Distance(l_distance, "ft")
-            return Range(name, damage, n_distance, l_distance, weight, cp_cost, description, categories, requirements, effects, rarity, tags)
+            return Range(name, damage, dmg_type, n_distance, l_distance, weight, cp_cost, description, categories, requirements, effects, rarity, tags)
         print("This item looks strange, it is a weapon but it is not ranged or melee")
-        return Weapon(name, damage, weight, cp_cost, description, categories, requirements, effects, rarity, tags)
+        return Weapon(name, damage, dmg_type, weight, cp_cost, description, categories, requirements, effects, rarity, tags)
     else:
         return Item(name, weight, cp_cost, description, categories, requirements, effects, rarity, tags)
 
@@ -117,6 +119,7 @@ class Weapon(Item):
     def __init__(self,
                  name: str,
                  damage: Dices.Dice,
+                 dmg_type: str, 
                  weight: Units.Weight,
                  cost: Money.Coinage,
                  description: str = "",
@@ -126,6 +129,7 @@ class Weapon(Item):
                  rarity: str = "Common",
                  tags: list[str] = []):
         self.damage = damage
+        self.dmg_type = dmg_type
         super().__init__(name, weight, cost, description,
                          categories, requirements, effects, rarity, tags)
         # TODO Add a system to incorporate damage type (ie. piercing)
@@ -134,9 +138,12 @@ class Weapon(Item):
 
 
 class Melee(Weapon):
+    # TODO Implement versatile proprieties etc...
     def __init__(self,
                  name: str,
                  damage: Dices.Dice,
+                 dmg_type: str, 
+                 range: Units.Distance,
                  weight: Units.Weight,
                  cost: Money.Coinage,
                  description: str = "",
@@ -145,7 +152,8 @@ class Melee(Weapon):
                  effects: dict[str, str] = {},
                  rarity: str = "Common",
                  tags: list[str] = []):
-        super().__init__(name, damage, weight, cost, description,
+        self.range = range
+        super().__init__(name, damage, dmg_type, weight, cost, description,
                          categories, requirements, effects, rarity, tags)
 
 # Add a class for ranged weapons
@@ -155,6 +163,7 @@ class Range(Weapon):
     def __init__(self,
                  name: str,
                  damage: Dices.Dice,
+                 dmg_type: str, 
                  n_distance: Units.Distance,
                  l_distance: Units.Distance,
                  weight: Units.Weight,
@@ -168,7 +177,7 @@ class Range(Weapon):
         assert n_distance <= l_distance, "The normal range distance must shoreter then the long distance"
         self.n_distance = n_distance
         self.l_distance = l_distance
-        super().__init__(name, damage, weight, cost, description,
+        super().__init__(name, damage, dmg_type, weight, cost, description,
                          categories, requirements, effects, rarity, tags)
         # TODO Add a system to use ammunition
 
