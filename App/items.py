@@ -29,16 +29,18 @@ class Item:
         self.tags = tags
 
     def save(self):
-        # Exemple output : emblem = Items.Item("emblem", Units.Weight(0, "lb"), Money.GP(5), "A holy symbol is a representation of a god or pantheon. A cleric or paladin can use a holy symbol as a spellcasting focus, as described in the Spellcasting section. To use the symbol in this way, the caster must hold it in hand, wear it visibly, or bear it on a shield.", ["Gear", "Holy symbol"], rarity="Common", tags=["Utility"])
+        # Exemple input : javelin = Items.Item("Javelin", Units.Weight(10, "lb"), Money.CP(250), "Proficiency with a javelin allows you to add your proficiency bonus to the attack roll for any attack you make with it.", ["Weapon", "Javelin"], {}, {"Attack type": "Melee", "Range": "5", "Damage": "1d6+4", "Damage type": "Piercing", "Thrown": "30/120"}, "Common", ["Damage", "Combat", "Javelin", "Simple"])
         categories = str(self.categories)[1:-1]
         categories = categories.replace("'", "")
+
         requirements = str(self.requirements)[1:-1].replace("'", "")
         requirements = requirements.replace("'", "")
+
         effects = str(self.effects)[1:-1].replace("'", "")
         effects = effects.replace("'", "")
+
         tags = str(self.tags)[1:-1].replace("'", "")
         tags = tags.replace("'", "")
-        print(categories, requirements, effects, tags)
 
         conn = sqlite3.connect(r'App\\Objects\\objects.db')
         cursor = conn.cursor()

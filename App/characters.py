@@ -67,6 +67,10 @@ class Character:
         self.exp = exp
         self.level = self.exp2level()
 
+        # TODO Update stats depending on inventory content
+        # TODO Add actions coming from inventory
+        # TODO Add weight system from inventory
+        # TODO Add a remove item from inventory method
         self.inventory = []
         for item in inventory:
             self.inventory.append(Items.find(item))
@@ -127,7 +131,11 @@ class Character:
 
         # TODO Incorporate saving throws
         # TODO Add inspiration
+        # TODO Add proficiencies
         # TODO Add proficiency bonus
+        # TODO Add languages
+        # TODO Add senses
+        # TODO Add spells
 
         self.update()
 

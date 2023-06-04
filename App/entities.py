@@ -124,7 +124,10 @@ class Entity():
 
         self.languages = languages
 
+        # TODO Make actions work
         self.actions = actions
+        
+        # TODO Add drops
 
     def save(self):
         # Generates all of the data to be saved
