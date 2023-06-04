@@ -18,6 +18,7 @@ import App.races as Races
 import App.classes as Classes
 import App.abilities as Abilities
 import App.skills as Skills
+import App.Utilities.units as Units
 test_char = Characters.Character("Test character", Races.Elf(), Classes.Wizard(["Religion", "Arcana"]), 8320, ["Bedroll", "Chain Mail", "Shield"], Units.Distance(35, "ft"), 12, 14, 14, 8, 14, 14, 12, 8, 8, 8, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 32)
 test_char.save()
 new_test_char = Characters.load(r'App\\Entities\\Characters\\Testing Character.txt')
