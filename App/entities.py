@@ -66,17 +66,7 @@ class Entity():
         assert alignment in alignment_list, f"The only authorized alignments are {alignment_list.join(', ')}"
         self.alignment = alignment
 
-        self.hp_str = hp_str
-        # Formats the dice data to extract the number of faces
-        nb_dices, dice_nb_faces = hp_str.split("d")
-        nb_dices = int(nb_dices)
-        dice_nb_faces = dice_nb_faces.split("+")[0]
-        dice_nb_faces = int(dice_nb_faces.split("-")[0])
-        modifier = int(hp_str.split("+")[1])
-        # If the x d y-z syntax is used instead of the x d y+z
-        if not modifier:
-            modifier = -int(hp_str.split("-")[1])
-        self.hp = Dices.Dice(dice_nb_faces).roll(nb_dices, modifier)
+        self.hp = Dices.str2dice_roll(hp_str)
 
         self.senses = senses
 

@@ -13,11 +13,11 @@ class Item:
                  weight: Units.Weight,
                  cost: Money.Coinage,
                  description: str = "",
-                 categories: list = [],
-                 requirements: dict = {},
-                 effects: dict = {},
+                 categories: list[str] = [],
+                 requirements: dict[str, str] = {},
+                 effects: dict[str, str] = {},
                  rarity: str = "Common",
-                 tags: list = []):
+                 tags: list[str] = []):
         self.name = name
         self.weight = weight
         self.cp_cost = cost.convert(Money.cp)
@@ -93,51 +93,86 @@ def find(item_name):
 
     tags = tags.split(", ") if tags else []
 
-    return Item(name, weight, cp_cost, description, categories, requirements, effects, rarity, tags)
+    # TODO Add more cases
+    if "Weapon" in categories:
+        damage = effects["Damage"]
+        atk_type = effects["Attack type"]
+        if atk_type == "Melee":
+            return Melee(name, damage, weight, cp_cost, description, categories, requirements, effects, rarity, tags)
+        elif atk_type == "Ranged":
+            n_distance, l_distance = effects["Range"].split("/")
+            n_distance = Units.Distance(n_distance, "ft")
+            l_distance = Units.Distance(l_distance, "ft")
+            return Range(name, damage, n_distance, l_distance, weight, cp_cost, description, categories, requirements, effects, rarity, tags)
+        print("This item looks strange, it is a weapon but it is not ranged or melee")
+        return Weapon(name, damage, weight, cp_cost, description, categories, requirements, effects, rarity, tags)
+    else:
+        return Item(name, weight, cp_cost, description, categories, requirements, effects, rarity, tags)
 
-# A class for stackable items (ie. torches)
-
-
-class Stackable(Item):
-    def __init__(self, name: str, weight: Units.Weight, cp_cost: int, quantity: int = 1, description: str = ""):
-        super().__init__(name, weight, cp_cost, description)
-        self.quantity = quantity
-        # TODO Add something to merge similar items on item creation
-
-# TODO Add class for measurable items (ie. ropes)
-# TODO Add class for ammunition (ie. arrows)
-# TODO Add class for special kinds of items (ie. spells)
-
-# Adds a class for unique items (not stackables)
-
-
-class Unique(Item):
-    def __init__(self, name: str, weight: Units.Weight, cp_cost: int, description: str = ""):
-        super().__init__(name, weight, cp_cost, description)
 
 # Adds a class for weapons (ranged and melee)
 
 
-class Weapon(Unique):
-    def __init__(self, name: str, damage: Dices.Dice, weight: Units.Weight, cp_cost: int, description: str = ""):
+class Weapon(Item):
+    def __init__(self,
+                 name: str,
+                 damage: Dices.Dice,
+                 weight: Units.Weight,
+                 cost: Money.Coinage,
+                 description: str = "",
+                 categories: list[str] = [],
+                 requirements: dict[str, str] = {},
+                 effects: dict[str, str] = {},
+                 rarity: str = "Common",
+                 tags: list[str] = []):
         self.damage = damage
-        super().__init__(name, weight, cp_cost, description)
+        super().__init__(name, weight, cost, description,
+                         categories, requirements, effects, rarity, tags)
         # TODO Add a system to incorporate damage type (ie. piercing)
 
-# Adds a class for melee weapons()
+# Adds a class for melee weapons
 
 
 class Melee(Weapon):
-    def __init__(self, name: str, damage: Dices.Dice, weight: Units.Weight, cp_cost: int, description: str = ""):
-        super().__init__(name, damage, weight, cp_cost, description)
+    def __init__(self,
+                 name: str,
+                 damage: Dices.Dice,
+                 weight: Units.Weight,
+                 cost: Money.Coinage,
+                 description: str = "",
+                 categories: list[str] = [],
+                 requirements: dict[str, str] = {},
+                 effects: dict[str, str] = {},
+                 rarity: str = "Common",
+                 tags: list[str] = []):
+        super().__init__(name, damage, weight, cost, description,
+                         categories, requirements, effects, rarity, tags)
 
 # Add a class for ranged weapons
 
 
 class Range(Weapon):
-    def __init__(self, name: str, damage: Dices.Dice, n_distance: Units.Distance, l_distance: Units.Distance, weight: Units.Weight, cp_cost: int, description: str = ""):
-        super().__init__(name, damage, weight, cp_cost, description)
+    def __init__(self,
+                 name: str,
+                 damage: Dices.Dice,
+                 n_distance: Units.Distance,
+                 l_distance: Units.Distance,
+                 weight: Units.Weight,
+                 cost: Money.Coinage,
+                 description: str = "",
+                 categories: list[str] = [],
+                 requirements: dict[str, str] = {},
+                 effects: dict[str, str] = {},
+                 rarity: str = "Common",
+                 tags: list[str] = []):
         assert n_distance <= l_distance, "The normal range distance must shoreter then the long distance"
         self.n_distance = n_distance
         self.l_distance = l_distance
+        super().__init__(name, damage, weight, cost, description,
+                         categories, requirements, effects, rarity, tags)
         # TODO Add a system to use ammunition
+
+# TODO Add class for measurable items (ie. ropes)
+# TODO Add class for ammunition (ie. arrows)
+# TODO Add class for special kinds of items (ie. spells)
+# TODO Update super load call for objects subclasses

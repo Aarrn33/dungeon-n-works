@@ -22,3 +22,20 @@ d10 = Dice(10)
 d12 = Dice(12)
 d20 = Dice(20)
 d100 = Dice(100)
+
+# Formats the dice data to extract the number of faces
+
+
+def str2dice_roll(string: str) -> int:
+    nb_dices, dice_nb_faces = string.split("d")
+    nb_dices = int(nb_dices)
+    try:
+        dice_nb_faces, modifier = dice_nb_faces.split("+")
+        dice_nb_faces = int(dice_nb_faces)
+        modifier = int(modifier)
+    except IndexError:
+        dice_nb_faces, modifier = dice_nb_faces.split("-")
+        dice_nb_faces = int(dice_nb_faces)
+        modifier = -int(modifier)
+
+    return Dice(dice_nb_faces).roll(nb_dices, modifier)
