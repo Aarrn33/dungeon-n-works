@@ -16,7 +16,7 @@ class Character:
                  race: (Races.Race | list),
                  chr_class: (Classes.Class | list),
                  exp: int = 0,
-                 inventory: list = [],
+                 inventory: list[str] = [],
                  speed: Units.Distance = Units.Distance(30, "ft"),
                  strength: int = -1,
                  wisdom: int = -1,
@@ -71,6 +71,7 @@ class Character:
         # TODO Add actions coming from inventory
         # TODO Add weight system from inventory
         # TODO Add a remove item from inventory method
+        inventory = eval(inventory)
         self.inventory = []
         for item in inventory:
             self.inventory.append(Items.find(item))
@@ -198,11 +199,11 @@ def load(chr_name):
     cursor.execute("PRAGMA table_info(characters)")
     raw_columns = cursor.fetchall()
     conn.close()
+    assert len(data) == 1, f"""Your query return more than one items or no 
+    items at all, it returned {[item[0] for item in data]}"""
     columns = []
     for column_data in raw_columns:
         columns.append(column_data[1])
-    assert len(data) == 1, f"""Your query return more than one items or no 
-    items at all, it returned {data}"""
     data_dict = {}
     for index, value in enumerate(data[0]):
         data_dict[columns[index]] = value
