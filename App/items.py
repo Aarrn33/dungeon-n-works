@@ -66,8 +66,20 @@ def find(item_name):
         f"""SELECT * FROM objects WHERE name LIKE "%{item_name}%" """)
     data = cursor.fetchall()
     conn.close()
-    assert len(data) == 1, f"""Your query return more than one items or no 
-    items at all, it returned {[item[0] for item in data]}"""
+
+    # Checks that if the search returns multiple hits, it chooses the one with the exact name or sends an error
+    item_found = False
+    if len(data) != 1:
+        for i, item in enumerate(data):
+            if item[0] == item_name:
+                print(item_name, data[i])
+                name, weight, cp_cost, description, categories, reqs, effs, rarity, tags = data[
+                    i]
+                item_found = True
+        if not item_found:
+            raise RuntimeError(
+                f"""Your query return more than one items or no items at all, it returned {[item[0] for item in data]}, you search for {item_name}""")
+
     name, weight, cp_cost, description, categories, reqs, effs, rarity, tags = data[
         0]
     weight = Units.Weight(weight, "lb")
@@ -96,16 +108,20 @@ def find(item_name):
         atk_type = effects["Attack type"]
         damage = effects["Damage"]
         dmg_type = effects["Damage type"]
+
         if atk_type == "Melee":
             range = Units.Distance(int(effects["Range"]), "ft")
             return Melee(name, damage, dmg_type, range, weight, cp_cost, description, categories, requirements, effects, rarity, tags)
+
         elif atk_type == "Ranged":
             n_distance, l_distance = effects["Range"].split("/")
             n_distance = Units.Distance(int(n_distance), "ft")
             l_distance = Units.Distance(int(l_distance), "ft")
             return Range(name, damage, dmg_type, n_distance, l_distance, weight, cp_cost, description, categories, requirements, effects, rarity, tags)
+
         print("This item looks strange, it is a weapon but it is not ranged or melee")
         return Weapon(name, damage, dmg_type, weight, cp_cost, description, categories, requirements, effects, rarity, tags)
+
     else:
         return Item(name, weight, cp_cost, description, categories, requirements, effects, rarity, tags)
 

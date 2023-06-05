@@ -169,6 +169,13 @@ class Character:
 
         conn = sqlite3.connect(r'App\\Entities\\characters.db')
         cursor = conn.cursor()
+
+        cursor.execute(f"SELECT * FROM characters WHERE name='{self.name}'")
+        data = cursor.fetchall()
+        # If the character already existed, delete the old save
+        if data:
+            print(data)
+            cursor.execute(f"DELETE FROM characters WHERE name='{self.name}'")
         cursor.execute(
             f"""INSERT INTO characters VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
             self.saved_data)
