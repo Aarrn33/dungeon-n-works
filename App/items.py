@@ -31,13 +31,13 @@ class Item:
         categories = str(self.categories)[1:-1]
         categories = categories.replace("'", "")
 
-        requirements = str(self.requirements)[1:-1].replace("'", "")
+        requirements = str(self.requirements)[1:-1]
         requirements = requirements.replace("'", "")
 
-        effects = str(self.effects)[1:-1].replace("'", "")
+        effects = str(self.effects)[1:-1]
         effects = effects.replace("'", "")
 
-        tags = str(self.tags)[1:-1].replace("'", "")
+        tags = str(self.tags)[1:-1]
         tags = tags.replace("'", "")
 
         conn = sqlite3.connect(r'App\\Objects\\objects.db')
@@ -182,3 +182,4 @@ class Range(Weapon):
 # TODO Add class for ammunition (ie. arrows)
 # TODO Add class for special kinds of items (ie. spells)
 # TODO Update find method return class (as specific as possible)
+# TODO Add a system for spellbooks
