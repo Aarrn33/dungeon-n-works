@@ -72,7 +72,6 @@ def find(item_name):
     if len(data) != 1:
         for i, item in enumerate(data):
             if item[0] == item_name:
-                print(item_name, data[i])
                 name, weight, cp_cost, description, categories, reqs, effs, rarity, tags = data[
                     i]
                 item_found = True

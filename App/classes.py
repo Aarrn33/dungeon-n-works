@@ -24,7 +24,6 @@ class Class:
             skills_to_choose = self.skills
             num_of_chosen_skills = 0
             while num_of_chosen_skills < nbskills:
-                print(self.skills)
                 skill_choice = input(
                     "Choose a skill amongst the ones shown to you before: ")
                 try:
