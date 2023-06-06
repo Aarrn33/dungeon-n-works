@@ -49,16 +49,14 @@ class Character:
         self.name = name
 
         if isinstance(race, str):
-            race = eval(race)
-            self.race = Races.find_race(race)
+            self.race = Races.find_race(eval(race))
         elif isinstance(race, Races.Race):
             self.race = race
         else:
             assert f"One shall never come here, pb in race init, input: {race}"
 
         if isinstance(chr_class, str):
-            chr_class = eval(chr_class)
-            self.chr_class = Classes.find_class(chr_class)
+            self.chr_class = Classes.find_class(eval(chr_class))
         elif isinstance(chr_class, Classes.Class):
             self.chr_class = chr_class
         else:
@@ -71,9 +69,8 @@ class Character:
         # TODO Add actions coming from inventory
         # TODO Add weight system from inventory
         # TODO Add a remove item from inventory method
-        inventory = eval(inventory)
         self.inventory = []
-        for item in inventory:
+        for item in eval(inventory):
             self.inventory.append(Items.find(item))
 
         if not isinstance(speed, Units.Unit):

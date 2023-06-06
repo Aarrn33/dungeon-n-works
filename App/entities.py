@@ -68,6 +68,10 @@ class Entity():
 
         self.hp = Dices.str2dice_roll(hp_str)
 
+        senses = eval(senses)
+        for key, value in senses.items():
+            distance, unit = value
+            senses[key] = Units.Distance(int(distance), unit)
         self.senses = senses
 
         self.exp = exp
@@ -87,6 +91,8 @@ class Entity():
             # AC = 10 + dexterity
             self.ac = 10 + self.dexterity.modifier
 
+        distance, unit = eval(speed)
+        speed = Units.Distance(int(distance), unit)
         self.speed = speed
 
         # Calculates skills
@@ -118,15 +124,15 @@ class Entity():
         self.persuasion = Skills.Persuasion(persuasion, self.charisma)
 
         # TODO Make the three following attributes work
-        self.vulnerabilities = vulnerabilities
-        self.resistances = resistances
-        self.immunities = immunities
+        self.vulnerabilities = eval(vulnerabilities)
+        self.resistances = eval(resistances)
+        self.immunities = eval(immunities)
 
-        self.languages = languages
+        self.languages = eval(languages)
 
         # TODO Make actions work
-        self.actions = actions
-        
+        self.actions = eval(actions)
+
         # TODO Add drops
 
     def save(self):
