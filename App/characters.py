@@ -137,6 +137,7 @@ class Character:
         # TODO Add languages
         # TODO Add senses
         # TODO Add spells
+        # TODO Add coins
 
         self.update()
 
