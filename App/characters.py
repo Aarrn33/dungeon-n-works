@@ -65,14 +65,6 @@ class Character:
         self.exp = exp
         self.level = self.exp2level()
 
-        # TODO Update stats depending on inventory content
-        # TODO Add actions coming from inventory
-        # TODO Add weight system from inventory
-        # TODO Add a remove item from inventory method
-        self.inventory = []
-        for item in eval(inventory):
-            self.inventory.append(Items.find(item))
-
         if not isinstance(speed, Units.Unit):
             speed = Units.Distance(speed, "ft")
         self.speed = speed
@@ -123,6 +115,14 @@ class Character:
             formatted_skill = formatted_skill.replace(" ", "_")
             getattr(self, formatted_skill).modify_value(1)
 
+        # TODO Update stats depending on inventory content
+        # TODO Add actions coming from inventory
+        # TODO Add weight system from inventory
+        # TODO Add a remove item from inventory method
+        self.inventory = []
+        for item in eval(inventory):
+            self.inventory.append(Items.find(item))
+
         self.hp = hp
         if self.hp <= 0:
             self.hp = self.chr_class.hd.roll()
@@ -141,6 +141,21 @@ class Character:
     def update(self):
         self.level = self.exp2level()
         self.ac = 10 + self.dexterity.modifier
+
+        # TODO Add alternate system for races such as Bugbears, Centaurs or Goliaths (2*normal carrying capacity)
+        self.encumbrance = "Unencumbered"
+        inventory_weight = sum([item.weight.value for item in self.inventory])
+        if inventory_weight > 5*self.strength.value and inventory_weight <= 10*self.strength.value:
+            self.speed.value = self.speed.value-10
+            self.encumbrance = "Encumbered"
+        elif inventory_weight > 10*self.strength.value and inventory_weight <= 15*self.strength.value:
+            self.speed.value = self.speed.value-20
+            # TODO Implement disadvantages ability checks, attack rolls and STr, Dex and Con saving throws
+            self.encumbrance = "Heavily encumbered"
+        else:
+            self.speed.value = 0
+            self.encumbrance = "Overencumbered"
+            print("You are unable to move because you are overencumbered")
 
     def save(self):
         # Generates all of the data to be saved
