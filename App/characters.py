@@ -65,6 +65,17 @@ class Character:
         self.exp = exp
         self.level = self.exp2level()
 
+        if self.level <= 4:
+            self.proficiency_bonus = 2
+        elif self.level <= 8:
+            self.proficiency_bonus = 3
+        elif self.level <= 12:
+            self.proficiency_bonus = 4
+        elif self.level <= 16:
+            self.proficiency_bonus = 5
+        else:
+            self.proficiency_bonus = 6
+
         if not isinstance(speed, Units.Unit):
             speed = Units.Distance(speed, "ft")
         self.speed = speed
@@ -117,30 +128,9 @@ class Character:
 
         # TODO Update stats depending on inventory content
         # TODO Add actions coming from inventory
-        # TODO Add weight system from inventory
-        # TODO Add a remove item from inventory method
         self.inventory = []
         for item in eval(inventory):
             self.inventory.append(Items.find(item))
-
-        self.hp = hp
-        if self.hp <= 0:
-            self.hp = self.chr_class.hd.roll()
-
-        # TODO Incorporate saving throws
-        # TODO Add inspiration
-        # TODO Add proficiencies
-        # TODO Add proficiency bonus
-        # TODO Add languages
-        # TODO Add senses
-        # TODO Add spells
-        # TODO Add coins
-
-        self.update()
-
-    def update(self):
-        self.level = self.exp2level()
-        self.ac = 10 + self.dexterity.modifier
 
         # TODO Add alternate system for races such as Bugbears, Centaurs or Goliaths (2*normal carrying capacity)
         self.encumbrance = "Unencumbered"
@@ -156,6 +146,18 @@ class Character:
             self.speed.value = 0
             self.encumbrance = "Overencumbered"
             print("You are unable to move because you are overencumbered")
+
+        self.hp = hp
+        if self.hp <= 0:
+            self.hp = self.chr_class.hd.roll()
+
+        # TODO Add a way to update stats (maybe through dedicated functions?)
+        # TODO Incorporate saving throws
+        # TODO Add inspiration
+        # TODO Add proficiencies
+        # TODO Add languages
+        # TODO Add senses
+        # TODO Add spells
 
     def save(self):
         # Generates all of the data to be saved

@@ -189,12 +189,14 @@ class Range(Weapon):
         assert n_distance.value <= l_distance.value, f"The normal range distance must shorter then the long distance, short: {n_distance}, long: {l_distance}"
         self.n_distance = n_distance
         self.l_distance = l_distance
+
         super().__init__(name, damage, dmg_type, weight, cost, description,
                          categories, requirements, effects, rarity, tags)
-        # TODO Add a system to use ammunition
 
-# TODO Add class for measurable items (ie. ropes)
-# TODO Add class for ammunition (ie. arrows)
-# TODO Add class for special kinds of items (ie. spells)
+        if "Bow" in self.categories:
+            self.ammunition = "Arrow"
+        elif "Crossbow" in self.categories:
+            self.ammunition = "Bolt"
+
+# TODO Add system for spells
 # TODO Update find method return class (as specific as possible)
-# TODO Add a system for spellbooks
