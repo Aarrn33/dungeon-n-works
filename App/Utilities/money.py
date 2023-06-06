@@ -13,7 +13,7 @@ class Coinage():
     def convert(self, end_coinage):
         assert isinstance(
             end_coinage, Coinage), "The end_coinage provided is not valid"
-        if isinstance(end_coinage, CP) and end_coinage.cp_value == 1:
+        if isinstance(end_coinage, CP):
             # Adds shortcut if it is a conversion to cp
             return CP(self.cp_value)
         else:
