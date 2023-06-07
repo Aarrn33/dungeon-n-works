@@ -190,6 +190,7 @@ class Character:
         # If the character already existed, delete the old save
         if data:
             cursor.execute(f"DELETE FROM characters WHERE name='{self.name}'")
+
         cursor.execute(
             f"""INSERT INTO characters VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
             self.saved_data)

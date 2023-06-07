@@ -66,6 +66,7 @@ class Entity():
         assert alignment in alignment_list, f"The only authorized alignments are {alignment_list.join(', ')}"
         self.alignment = alignment
 
+        self.hp_str = hp_str
         self.hp = Dices.str2dice_roll(hp_str)
 
         senses = eval(senses)
@@ -163,6 +164,13 @@ class Entity():
 
         conn = sqlite3.connect(r'App\\Entities\\entities.db')
         cursor = conn.cursor()
+
+        cursor.execute(f"SELECT * FROM entities WHERE name='{self.name}'")
+        data = cursor.fetchall()
+        # If the character already existed, delete the old save
+        if data:
+            cursor.execute(f"DELETE FROM entities WHERE name='{self.name}'")
+
         cursor.execute(
             f"""INSERT INTO entities VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
             self.saved_data)
