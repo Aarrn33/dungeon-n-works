@@ -4,7 +4,8 @@ import App.abilities as Abilities
 import App.skills as Skills
 import App.Utilities.units as Units
 import App.items as Items
-import types
+from App.Utilities.find import find_class
+from types import FunctionType, MethodType
 import sqlite3
 
 # This class is used to create a DnD character from a template
@@ -56,7 +57,7 @@ class Character:
             assert f"One shall never come here, pb in race init, input: {race}"
 
         if isinstance(chr_class, str):
-            self.chr_class = Classes.find_class(eval(chr_class))
+            self.chr_class = find_class(eval(chr_class))
         elif isinstance(chr_class, Classes.Class):
             self.chr_class = chr_class
         else:
@@ -128,13 +129,15 @@ class Character:
 
         # TODO Update stats depending on inventory content
         # TODO Add actions coming from inventory
-        self.inventory = []
+        self.inventory = {}
         for item in eval(inventory):
-            self.inventory.append(Items.find(item))
+            item_obj = Items.find(item[1])
+            self.inventory[item_obj.name] = (item[0], item_obj)
 
         # TODO Add alternate system for races such as Bugbears, Centaurs or Goliaths (2*normal carrying capacity)
         self.encumbrance = "Unencumbered"
-        inventory_weight = sum([item.weight.value for item in self.inventory])
+        inventory_weight = sum(
+            [item[1].weight.value for item in self.inventory.values()])
         if inventory_weight > 5*self.strength.value and inventory_weight <= 10*self.strength.value:
             self.speed.value = self.speed.value-10
             self.encumbrance = "Encumbered"
@@ -162,9 +165,11 @@ class Character:
     def save(self):
         # Generates all of the data to be saved
         self.saved_data = []
+        not_to_save = ["saved_data", "ac", "level",
+                       "encumbrance", "proficiency_bonus"]
         for elem in dir(self):
             obj = getattr(self, elem)
-            if elem[0] != "_" and not isinstance(obj, (types.FunctionType, types.MethodType)) and elem not in ["saved_data", "ac", "level"]:
+            if elem[0] != "_" and not isinstance(obj, (FunctionType, MethodType)) and elem not in not_to_save:
                 if isinstance(obj, (Skills.Skill, Abilities.Ability)):
                     self.saved_data.append(str(getattr(obj, "value")))
 
@@ -175,7 +180,8 @@ class Character:
                     self.saved_data.append(str(obj.value))
 
                 elif elem == "inventory":
-                    self.saved_data.append(str([item.name for item in obj]))
+                    self.saved_data.append(
+                        str([(item[0], item[1].name) for item in obj.values()]))
 
                 else:
                     self.saved_data.append(str(obj))

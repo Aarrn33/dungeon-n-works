@@ -2,6 +2,7 @@
 tests.py
 App/*.txt
 .vscode/
+.backups/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

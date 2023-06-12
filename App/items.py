@@ -26,6 +26,9 @@ class Item:
         self.rarity = rarity
         self.tags = tags
 
+    def __repr__(self):
+        return "<Item: " + str((self.name, self.weight.value, self.cp_cost.number)) + ">"
+
     def save(self):
         # Exemple input : javelin = Items.Item("Javelin", Units.Weight(10, "lb"), Money.CP(250), "Proficiency with a javelin allows you to add your proficiency bonus to the attack roll for any attack you make with it.", ["Weapon", "Javelin"], {}, {"Attack type": "Melee", "Range": "5", "Damage": "1d6+4", "Damage type": "Piercing", "Thrown": "30/120"}, "Common", ["Damage", "Combat", "Javelin", "Simple"])
         categories = str(self.categories)[1:-1]
@@ -200,3 +203,5 @@ class Range(Weapon):
 
 # TODO Add system for spells
 # TODO Update find method return class (as specific as possible)
+
+# TODO Add the following items
