@@ -1,10 +1,22 @@
 import App.Utilities.dices as dices
+import App.Utilities.inventory as inventory
+from App.Utilities.Searches.find_pack import find_pack
 
 # A class that is used to create character classes
 
 
 class Class:
-    def __init__(self, name: str, hd: dices.Dice, st: list, skills: list, nbskills: int, chosen_skills: list = [], ask_starting_equipment: bool = True):
+    def __init__(
+        self,
+        name: str,
+        hd: dices.Dice,
+        st: list[str],
+        skills: list[str],
+        nbskills: int,
+        starting_equipment: inventory.Inventory,
+        chosen_skills: list[str] = [],
+        ask_starting_equipment: bool = True,
+    ):
         self.name = name  # Name of the class
         self.hd = hd  # Hit dice
         self.st = st  # Skills which have saving throws
@@ -42,6 +54,10 @@ class Class:
                     print(
                         "You must choose a skill in the list provided to you and that you haven't previously chosen")
 
+        if ask_starting_equipment:
+            self.chosen_starting_equipment = get_starting_equipment(
+                starting_equipment)
+
         self.data = [name, self.chosen_skills, ask_starting_equipment]
 
 # TODO Add starting equipment
@@ -49,15 +65,16 @@ class Class:
 # args
 # if choice
 # [option 1, option 2, ...]
-# if forced : use tuple (quantity, "name") or (quantity, "Pack", "name_of_the_pack")
+# if forced : use tuple (quantity, "name") or ("name_of_the_pack") or (["crit1", "crit2"])
 # options
 # single item : tuple (quantity, "name") (searchable in item db)
-# TODO add pack (ie. explorer's pack)
-# packs : tuple (quantity, "Pack", "name_of_the_pack") to take care of in body function
+# packs : str "name_of_the_pack"
+# TODO implement criterias
 # criteria : list  ["crit 1", "crit 2"]
 
 
-def get_starting_equipment(*args):
+def get_starting_equipment(args):
+    equipment = inventory.Inventory()
     for line in args:
         # If there is a choice to make
         if isinstance(line, list):
@@ -65,22 +82,52 @@ def get_starting_equipment(*args):
                 "Choose amongst the following choices by using the number of the item you want:")
             for index, value in enumerate(line):
                 # If it is a single item
-                if isinstance(value, tuple) and len(value) == 2:
+                if isinstance(value, tuple):
                     f_value = value[-1]
                 # If it is a pack
-                elif isinstance(value, tuple) and len(value) == 3:
+                elif isinstance(value, str):
                     f_value = value[-1]
                 # If it is based on a criteria (ie. a martial melee weapon)
-                # TODO implement criterias
                 elif isinstance(value, list):
                     pass
                 else:
                     raise RuntimeError(
-                        f"The provided value: {value} is interpretable for starting equipment")
+                        f"The provided value: {value} is not interpretable for starting equipment")
                 print(f"({index+1}) {f_value}")
+            choice = int(
+                input("Enter the number corresponding to your choice: \n"))
+            # To match the index
+            choice -= 1
+            choice = line[choice]
+            # If it is a single item
+            if isinstance(choice, tuple) and len(choice) == 2:
+                quantity, name = choice
+                equipment += inventory.list2inv([(quantity, name)])
+            # If it is a pack
+            elif isinstance(choice, str):
+                equipment += find_pack(choice)
+            # If it is based on a criteria
+            elif isinstance(choice, list):
+                pass
+            else:
+                raise RuntimeError(
+                    f"The provided value: {choice} is not interpretable for starting equipment")
         # If there is no choice to make
         elif isinstance(line, tuple):
-            pass
+            # If it is a single item
+            if isinstance(line, tuple) and len(line) == 2:
+                quantity, name = line
+                equipment += inventory.list2inv([(quantity, name)])
+            # If it is a pack
+            elif isinstance(line, str):
+                equipment += find_pack(line)
+            # If it is based on a criteria
+            elif isinstance(line, list):
+                pass
+            else:
+                raise RuntimeError(
+                    f"The provided value: {line} is not interpretable for starting equipment")
         else:
             raise RuntimeError(
                 f"{line} is not a valid argument for starting equipment")
+        return equipment

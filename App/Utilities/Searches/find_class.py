@@ -12,7 +12,7 @@ from App.Classes.warlock import Warlock
 from App.Classes.wizard import Wizard
 
 
-def find_class(class_data):
+def find_class(class_data: list[(str | list)]):
     # Changes the string provided to a 1 item list to better treat it
     if isinstance(class_data, str):
         class_data = [class_data]

@@ -4,7 +4,8 @@ import App.abilities as Abilities
 import App.skills as Skills
 import App.Utilities.units as Units
 import App.items as Items
-from App.Utilities.find import find_class
+import App.Utilities.inventory as Inventory
+from App.Utilities.Searches.find_class import find_class
 from types import FunctionType, MethodType
 import sqlite3
 
@@ -129,15 +130,12 @@ class Character:
 
         # TODO Update stats depending on inventory content
         # TODO Add actions coming from inventory
-        self.inventory = {}
-        for item in eval(inventory):
-            item_obj = Items.find(item[1])
-            self.inventory[item_obj.name] = (item[0], item_obj)
+        self.inventory = Inventory.list2inv(eval(inventory))
 
         # TODO Add alternate system for races such as Bugbears, Centaurs or Goliaths (2*normal carrying capacity)
         self.encumbrance = "Unencumbered"
         inventory_weight = sum(
-            [item[1].weight.value for item in self.inventory.values()])
+            [Items.find(name).weight.value for name in self.inventory.names])
         if inventory_weight > 5*self.strength.value and inventory_weight <= 10*self.strength.value:
             self.speed.value = self.speed.value-10
             self.encumbrance = "Encumbered"
@@ -181,7 +179,7 @@ class Character:
 
                 elif elem == "inventory":
                     self.saved_data.append(
-                        str([(item[0], item[1].name) for item in obj.values()]))
+                        str([(item[0], item[1]) for item in list(obj.items())]))
 
                 else:
                     self.saved_data.append(str(obj))
