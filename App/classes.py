@@ -48,8 +48,7 @@ class Class:
                     assert skill_choice in skills_to_choose
                     skills_to_choose.remove(skill_choice)
                     num_of_chosen_skills += 1
-                    self.chosen_skills = self.chosen_skills.append(
-                        skill_choice)
+                    self.chosen_skills.append(skill_choice)
                 except AssertionError:
                     print(
                         "You must choose a skill in the list provided to you and that you haven't previously chosen")
@@ -57,10 +56,11 @@ class Class:
         if ask_starting_equipment:
             self.chosen_starting_equipment = get_starting_equipment(
                 starting_equipment)
+            self.ask_starting_equipment = False
 
         self.data = [name, self.chosen_skills, ask_starting_equipment]
 
-# TODO Add starting equipment
+# TODO Update classes to fit the wizard style
 
 # args
 # if choice
@@ -73,7 +73,7 @@ class Class:
 # criteria : list  ["crit 1", "crit 2"]
 
 
-def get_starting_equipment(args):
+def get_starting_equipment(args: list[(list | tuple)]):
     equipment = inventory.Inventory()
     for line in args:
         # If there is a choice to make
@@ -86,7 +86,7 @@ def get_starting_equipment(args):
                     f_value = value[-1]
                 # If it is a pack
                 elif isinstance(value, str):
-                    f_value = value[-1]
+                    f_value = value
                 # If it is based on a criteria (ie. a martial melee weapon)
                 elif isinstance(value, list):
                     pass
@@ -102,7 +102,7 @@ def get_starting_equipment(args):
             # If it is a single item
             if isinstance(choice, tuple) and len(choice) == 2:
                 quantity, name = choice
-                equipment += inventory.list2inv([(quantity, name)])
+                equipment += inventory.list2inv([(name, quantity)])
             # If it is a pack
             elif isinstance(choice, str):
                 equipment += find_pack(choice)
@@ -114,13 +114,14 @@ def get_starting_equipment(args):
                     f"The provided value: {choice} is not interpretable for starting equipment")
         # If there is no choice to make
         elif isinstance(line, tuple):
+            choice = line[0]
             # If it is a single item
-            if isinstance(line, tuple) and len(line) == 2:
-                quantity, name = line
-                equipment += inventory.list2inv([(quantity, name)])
+            if isinstance(choice, tuple) and len(choice) == 2:
+                quantity, name = choice
+                equipment += inventory.list2inv([(name, quantity)])
             # If it is a pack
-            elif isinstance(line, str):
-                equipment += find_pack(line)
+            elif isinstance(choice, str):
+                equipment += find_pack(choice)
             # If it is based on a criteria
             elif isinstance(line, list):
                 pass
@@ -130,4 +131,4 @@ def get_starting_equipment(args):
         else:
             raise RuntimeError(
                 f"{line} is not a valid argument for starting equipment")
-        return equipment
+    return equipment

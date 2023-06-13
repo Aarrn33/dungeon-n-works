@@ -5,7 +5,8 @@ import App.skills as Skills
 import App.Utilities.units as Units
 import App.items as Items
 import App.Utilities.inventory as Inventory
-from App.Utilities.Searches.find_class import find_class
+from App.Utilities.Searches.find_class import *
+from App.Utilities.Searches.find_race import *
 from types import FunctionType, MethodType
 import sqlite3
 
@@ -51,14 +52,19 @@ class Character:
         self.name = name
 
         if isinstance(race, str):
-            self.race = Races.find_race(eval(race))
+            # If it looks like a list
+            if race[0] == "[" and race[-1] == "]":
+                race = eval(race)
+            self.race = find_race(race)
         elif isinstance(race, Races.Race):
             self.race = race
         else:
             assert f"One shall never come here, pb in race init, input: {race}"
 
         if isinstance(chr_class, str):
-            self.chr_class = find_class(eval(chr_class))
+            if chr_class[0] == "[" and chr_class[-1] == "]":
+                chr_class = eval(chr_class)
+            self.chr_class = find_class(chr_class)
         elif isinstance(chr_class, Classes.Class):
             self.chr_class = chr_class
         else:
@@ -130,7 +136,17 @@ class Character:
 
         # TODO Update stats depending on inventory content
         # TODO Add actions coming from inventory
-        self.inventory = Inventory.list2inv(eval(inventory))
+        if inventory:
+            self.inventory = Inventory.list2inv(eval(inventory))
+        else:
+            self.inventory = Inventory.Inventory()
+
+        # Checks if some starting equipment was chosen
+        try:
+            self.inventory += getattr(self.chr_class,
+                                      "chosen_starting_equipment")
+        except AttributeError:
+            pass
 
         # TODO Add alternate system for races such as Bugbears, Centaurs or Goliaths (2*normal carrying capacity)
         self.encumbrance = "Unencumbered"
