@@ -3,7 +3,11 @@ import App.Utilities.dices as dices
 
 
 class Wizard(Classes.Class):
-    def __init__(self, chosen_skills: list = [], ask_starting_equipment: bool = True):
+    def __init__(
+            self,
+            chosen_skills: list = [],
+            ask_starting_equipment: bool = True,
+    ):
         self.name = "Wizard"
         self.hd = dices.d6
         self.st = [
